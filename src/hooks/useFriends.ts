@@ -1,19 +1,19 @@
-import {useState, useEffect} from 'react';
+import {useState, useCallback} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api/config';
 
 interface Friend {
-  name: 'string';
-  friendId: 'string';
-  statusMessage: 'string';
-  friendType: 'string';
+  name: string;
+  friendId: string;
+  statusMessage: string;
+  friendType: string;
 }
 
 export const useFriends = () => {
   const [friends, setFriends] = useState<Friend[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const loadFriends = async (forceRefresh = false) => {
+  const loadFriends = useCallback(async (forceRefresh = false) => {
     setIsLoading(true);
     try {
       let storedFriends = null;
@@ -32,7 +32,7 @@ export const useFriends = () => {
           },
         });
         if (response.status === 200) {
-          console.log('get friedns success!');
+          console.log('Successfully fetched friends from API');
           setFriends(response.data);
           await AsyncStorage.setItem('friends', JSON.stringify(response.data));
         }
@@ -42,10 +42,6 @@ export const useFriends = () => {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  useEffect(() => {
-    loadFriends();
   }, []);
 
   return {friends, loadFriends, isLoading};

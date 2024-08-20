@@ -1,7 +1,6 @@
-import React from 'react';
+import React, {useState, useCallback, useRef} from 'react';
 import styled from 'styled-components/native';
-import backgroundImage from '../assets/background/homeBackground.png';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useFocusEffect} from '@react-navigation/native';
 import {
   Text,
   SafeAreaView,
@@ -9,27 +8,78 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
+  RefreshControl,
 } from 'react-native';
 import ListItem from '../components/FriendsList/ListItem';
 import {globalStyles} from '../styles/globalStyles';
-import {useEffect, useState} from 'react';
-import {useFriends} from '../hooks/useFriends';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import api from '../api/config';
 
 export default function FriendsListScreen() {
   const navigation = useNavigation();
+  const [friendsList, setFriendsList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const lastUpdateTime = useRef(0);
+
   const moveToAddFriends = () => {
     navigation.navigate('AddFriends');
   };
 
-  const {friends, loadFriends, isLoading} = useFriends();
-  // useEffect(() => {}, []);
+  const getFriends = useCallback(
+    async (forceUpdate = false) => {
+      const currentTime = Date.now();
+      const timeSinceLastUpdate = currentTime - lastUpdateTime.current;
 
-  const onRefresh = () => {
-    loadFriends(true); // 강제로 새로고침
-  };
+      // 마지막 업데이트 후 5분(300000ms) 이내라면 업데이트 하지 않음
+      if (
+        !forceUpdate &&
+        timeSinceLastUpdate < 300000 &&
+        friendsList.length > 0
+      ) {
+        return;
+      }
+
+      setIsLoading(true);
+      setError(null);
+      const token = await AsyncStorage.getItem('jwtAccessToken');
+      try {
+        const response = await api.get('/friend/all', {
+          headers: {
+            Authorization: token,
+          },
+        });
+        if (response.status === 200) {
+          console.log('친구 목록 불러오기 성공!', response.data);
+          setFriendsList(response.data);
+          lastUpdateTime.current = currentTime;
+        }
+      } catch (e) {
+        console.log('친구 목록 불러오기 실패:', e);
+        setError('친구 목록을 불러오는데 실패했습니다.');
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [friendsList.length],
+  );
+
+  useFocusEffect(
+    useCallback(() => {
+      getFriends();
+    }, [getFriends]),
+  );
+
+  const onRefresh = useCallback(() => {
+    getFriends(true);
+  }, [getFriends]);
+
   return (
     <ScreenContainer>
-      <BackgroundImage source={backgroundImage} resizeMode="cover" />
+      <BackgroundImage
+        source={require('../assets/background/homeBackground.png')}
+        resizeMode="cover"
+      />
       <SafeAreaContainer>
         <Container>
           <Header>
@@ -42,7 +92,10 @@ export default function FriendsListScreen() {
               />
             </TouchableOpacity>
           </Header>
-          <ScrollView>
+          <ScrollView
+            refreshControl={
+              <RefreshControl refreshing={isLoading} onRefresh={onRefresh} />
+            }>
             <Text style={globalStyles.grayBold16}>누구와 연락할까요?</Text>
             <TopImage
               source={require('../assets/FriendsList/FriednsListTop.png')}
@@ -58,14 +111,18 @@ export default function FriendsListScreen() {
             </View>
             <View style={{marginBottom: 20}}>
               <Text style={globalStyles.bold12}>목록</Text>
-              {friends.map(friend => (
-                <ListItem
-                  key={friend.friendId}
-                  id={friend.friendId}
-                  name={friend.name}
-                  statusMessage={friend.statusMessage}
-                />
-              ))}
+              {error ? (
+                <Text style={{color: 'red'}}>{error}</Text>
+              ) : (
+                friendsList.map(friend => (
+                  <ListItem
+                    key={friend.friendId}
+                    id={friend.friendId}
+                    name={friend.name}
+                    statusMessage={friend.statusMessage}
+                  />
+                ))
+              )}
             </View>
           </ScrollView>
         </Container>

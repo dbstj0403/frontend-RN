@@ -1,8 +1,9 @@
 import React from 'react';
-import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {Image, Text, TouchableOpacity, View, Alert} from 'react-native';
 import styled from 'styled-components/native';
 import {globalStyles} from '../../styles/globalStyles';
 import api from '../../api/config';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function ReslutItem({
   id,
@@ -13,6 +14,38 @@ export default function ReslutItem({
   name: string;
   statusMessage: string;
 }) {
+  const addFriend = async () => {
+    const token = await AsyncStorage.getItem('jwtAccessToken');
+    console.log(token, id);
+    try {
+      const response = await api.post(
+        '/friend/add',
+        {customId: id},
+        {
+          headers: {
+            Authorization: token,
+          },
+        },
+      );
+      if (response.status === 204) {
+        console.log('친구 추가 성공!');
+        Alert.alert(
+          '완료',
+          '친구 추가가 완료되었습니다!',
+          [{text: '확인', onPress: () => console.log('확인')}],
+          {cancelable: false},
+        );
+      }
+    } catch (e) {
+      console.log(e);
+      Alert.alert(
+        '오류',
+        '친구 추가에 실패하였습니다.\n다시 시도해 주세요.',
+        [{text: '확인', onPress: () => console.log('확인')}],
+        {cancelable: false},
+      );
+    }
+  };
   return (
     <>
       <Container>
@@ -23,7 +56,7 @@ export default function ReslutItem({
         />
         <NameText style={globalStyles.bold18}>{name}</NameText>
         <Text style={globalStyles.grayRegular16}>{statusMessage}</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={addFriend}>
           <Text>친구 추가</Text>
         </TouchableOpacity>
       </Container>
