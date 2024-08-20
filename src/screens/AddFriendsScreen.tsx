@@ -6,22 +6,29 @@ import {
   SafeAreaView,
   View,
   Image,
-  ScrollView,
   TouchableOpacity,
   TextInput,
   StyleSheet,
 } from 'react-native';
-import ListItem from '../components/FriendsList/ListItem';
 import {globalStyles} from '../styles/globalStyles';
 import {useNavigation} from '@react-navigation/native';
 import ContactItem from '../components/addFriends/ContactItem';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api/config';
+import ResultItem from '../components/addFriends/ResultItem';
+
+interface SearchResultItem {
+  customId: string;
+  name: string;
+  statusMessage: string;
+}
 
 export default function AddFriendsScreen() {
   const [id, setId] = useState('');
-  const [isNothing, setIsNothing] = useState(false);
-  const [searchResult, setSearchResult] = useState([]);
+  const [isSearched, setIsSearched] = useState(false);
+  const [searchResult, setSearchResult] = useState<SearchResultItem | null>(
+    null,
+  );
   const [noUsersId, setNoUsersId] = useState('');
 
   const navigation = useNavigation();
@@ -32,8 +39,10 @@ export default function AddFriendsScreen() {
 
   const goSearch = async () => {
     const token = await AsyncStorage.getItem('jwtAccessToken');
-    setIsNothing(false);
-    console.log(id);
+    setIsSearched(true);
+    setSearchResult(null);
+    setNoUsersId('');
+
     try {
       const response = await api.get('/friend/search', {
         params: {
@@ -49,13 +58,20 @@ export default function AddFriendsScreen() {
       }
     } catch (e) {
       console.log(e);
-      if (e.response.status === 500) {
+      if (e.response && e.response.status === 500) {
         console.log('no users!');
         setNoUsersId(id);
-        setIsNothing(true);
       }
     }
   };
+
+  const handleInputChange = (text: string) => {
+    setId(text);
+    setIsSearched(false);
+    setSearchResult(null);
+    setNoUsersId('');
+  };
+
   const nameList = ['민지', '하니', '다니엘', '해린', '혜인'];
 
   return (
@@ -82,7 +98,7 @@ export default function AddFriendsScreen() {
             <Input
               style={globalStyles.regular16}
               value={id}
-              onChangeText={e => setId(e)}
+              onChangeText={handleInputChange}
               placeholder="검색"
               placeholderTextColor="#666666"
               editable={true}
@@ -104,13 +120,23 @@ export default function AddFriendsScreen() {
               ))}
             </Contact>
           )}
-          {isNothing && noUsersId === id && (
+          {isSearched && noUsersId !== '' && (
             <Nothing>
               <Text style={[styles.centeredText, globalStyles.bold20]}>
                 "{noUsersId}"의 {'\n'}검색 결과가 없습니다. {'\n'}아이디를 다시
                 확인해 주세요!
               </Text>
             </Nothing>
+          )}
+          {isSearched && searchResult && (
+            <SearchResultContainer>
+              <Text style={globalStyles.bold12}>검색 결과</Text>
+              <ResultItem
+                id={searchResult.customId}
+                name={searchResult.name}
+                statusMessage={searchResult.statusMessage}
+              />
+            </SearchResultContainer>
           )}
         </Container>
       </SafeAreaContainer>
@@ -188,3 +214,8 @@ const styles = StyleSheet.create({
     width: '100%',
   },
 });
+
+const SearchResultContainer = styled.View`
+  margin-top: 48px;
+  margin-left: 5px;
+`;
