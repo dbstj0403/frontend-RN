@@ -9,31 +9,31 @@
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* DlidamAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* DlidamAppTests.m */; };
 		0C80B921A6F3F58F76C31292 /* libPods-DlidamApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-DlidamApp.a */; };
+		1292F782237B4D5EB576699D /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 55AAB04B81A246FCB2752076 /* Pretendard-Bold.otf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		1A79170F9C8B487990687C8E /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = DFE934097EBC41C7883ED66A /* Pretendard-Medium.otf */; };
+		2750B1239FB84C4A8F120F3F /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = B789AC92ED1148B995B76107 /* Pretendard-ExtraLight.otf */; };
+		2FC69470856A47429D50A546 /* Pretendard-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB67A7216B2C43EAA081350E /* Pretendard-SemiBold.ttf */; };
+		3982D5207C064A6FA1E8F4EF /* Pretendard-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 647AD92527DF4BACAB99935A /* Pretendard-ExtraLight.ttf */; };
+		499E13CD5B054596B22EBA6B /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = AD465041A2BD4AD2B1DA4D10 /* Pretendard-ExtraBold.otf */; };
+		4E029056BDA148AAB1D9240B /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 551FCB8F956345148C94B15D /* Pretendard-Black.otf */; };
+		4FD75247E18A44E488C39EA1 /* Pretendard-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E331BD6BDB634F7C80D83F2B /* Pretendard-Medium.ttf */; };
+		54A0E3EA11414599B2B64C40 /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = B2B66086E819436E97B8FF05 /* Pretendard-Thin.otf */; };
 		7699B88040F8A987B510C191 /* libPods-DlidamApp-DlidamAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-DlidamApp-DlidamAppTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		DD9F4368ABBC838B378367D9 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 685702852EDFFD474E85AA00 /* PrivacyInfo.xcprivacy */; };
-		4E029056BDA148AAB1D9240B /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 551FCB8F956345148C94B15D /* Pretendard-Black.otf */; };
-		1292F782237B4D5EB576699D /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 55AAB04B81A246FCB2752076 /* Pretendard-Bold.otf */; };
-		499E13CD5B054596B22EBA6B /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = AD465041A2BD4AD2B1DA4D10 /* Pretendard-ExtraBold.otf */; };
-		2750B1239FB84C4A8F120F3F /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = B789AC92ED1148B995B76107 /* Pretendard-ExtraLight.otf */; };
-		C6D823B53F19411BA41FEF03 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = BECAC077D150440BB4F054C0 /* Pretendard-Light.otf */; };
-		1A79170F9C8B487990687C8E /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = DFE934097EBC41C7883ED66A /* Pretendard-Medium.otf */; };
-		AB20389A0FAA43B9B05046E4 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 241BD6C451E443A9A4B89224 /* Pretendard-Regular.otf */; };
 		8FFD29C7699149B984348059 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DD26AA74CD6347FF9563653A /* Pretendard-SemiBold.otf */; };
-		54A0E3EA11414599B2B64C40 /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = B2B66086E819436E97B8FF05 /* Pretendard-Thin.otf */; };
 		96B9431E9A6F408092EE4A4A /* Pretendard-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58AAE819706449959113A853 /* Pretendard-Black.ttf */; };
-		A618A8129B6C41148EE3C37C /* Pretendard-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FE66FD01CA646E6BDC8DC16 /* Pretendard-Bold.ttf */; };
-		D05F00FCE73649B582BC2EB3 /* Pretendard-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE6DC53BB9984FD588EAE122 /* Pretendard-ExtraBold.ttf */; };
-		3982D5207C064A6FA1E8F4EF /* Pretendard-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 647AD92527DF4BACAB99935A /* Pretendard-ExtraLight.ttf */; };
 		9F0C24F6D76A423AB445B671 /* Pretendard-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A7E4B4113FF4AECAB2EDA74 /* Pretendard-Light.ttf */; };
-		4FD75247E18A44E488C39EA1 /* Pretendard-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E331BD6BDB634F7C80D83F2B /* Pretendard-Medium.ttf */; };
-		D9750096BEA14868B03A04F3 /* Pretendard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF3F0A3F19D94201A9BADC2E /* Pretendard-Regular.ttf */; };
-		2FC69470856A47429D50A546 /* Pretendard-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB67A7216B2C43EAA081350E /* Pretendard-SemiBold.ttf */; };
-		C20E6659369A4EF698A8EACC /* Pretendard-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B51F917CD92F46F2AD09D7D0 /* Pretendard-Thin.ttf */; };
+		A618A8129B6C41148EE3C37C /* Pretendard-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FE66FD01CA646E6BDC8DC16 /* Pretendard-Bold.ttf */; };
+		AB20389A0FAA43B9B05046E4 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 241BD6C451E443A9A4B89224 /* Pretendard-Regular.otf */; };
 		BB9C444CE901461B9D7D8360 /* PretendardVariable.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8498748BC0104CD38E8C785A /* PretendardVariable.ttf */; };
+		C20E6659369A4EF698A8EACC /* Pretendard-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B51F917CD92F46F2AD09D7D0 /* Pretendard-Thin.ttf */; };
+		C6D823B53F19411BA41FEF03 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = BECAC077D150440BB4F054C0 /* Pretendard-Light.otf */; };
+		D05F00FCE73649B582BC2EB3 /* Pretendard-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE6DC53BB9984FD588EAE122 /* Pretendard-ExtraBold.ttf */; };
+		D9750096BEA14868B03A04F3 /* Pretendard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF3F0A3F19D94201A9BADC2E /* Pretendard-Regular.ttf */; };
+		DD9F4368ABBC838B378367D9 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 685702852EDFFD474E85AA00 /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,33 +58,33 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = DlidamApp/main.m; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = DlidamApp/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-DlidamApp-DlidamAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DlidamApp-DlidamAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1FE66FD01CA646E6BDC8DC16 /* Pretendard-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Bold.ttf"; path = "../src/fonts/Pretendard-Bold.ttf"; sourceTree = "<group>"; };
+		241BD6C451E443A9A4B89224 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Regular.otf"; path = "../src/fonts/Pretendard-Regular.otf"; sourceTree = "<group>"; };
+		2A7E4B4113FF4AECAB2EDA74 /* Pretendard-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Light.ttf"; path = "../src/fonts/Pretendard-Light.ttf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-DlidamApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DlidamApp.debug.xcconfig"; path = "Target Support Files/Pods-DlidamApp/Pods-DlidamApp.debug.xcconfig"; sourceTree = "<group>"; };
+		551FCB8F956345148C94B15D /* Pretendard-Black.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Black.otf"; path = "../src/fonts/Pretendard-Black.otf"; sourceTree = "<group>"; };
+		55AAB04B81A246FCB2752076 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Bold.otf"; path = "../src/fonts/Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-DlidamApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DlidamApp.release.xcconfig"; path = "Target Support Files/Pods-DlidamApp/Pods-DlidamApp.release.xcconfig"; sourceTree = "<group>"; };
+		58AAE819706449959113A853 /* Pretendard-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Black.ttf"; path = "../src/fonts/Pretendard-Black.ttf"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-DlidamApp-DlidamAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DlidamApp-DlidamAppTests.debug.xcconfig"; path = "Target Support Files/Pods-DlidamApp-DlidamAppTests/Pods-DlidamApp-DlidamAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-DlidamApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DlidamApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		647AD92527DF4BACAB99935A /* Pretendard-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-ExtraLight.ttf"; path = "../src/fonts/Pretendard-ExtraLight.ttf"; sourceTree = "<group>"; };
 		685702852EDFFD474E85AA00 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = DlidamApp/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = DlidamApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8498748BC0104CD38E8C785A /* PretendardVariable.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = PretendardVariable.ttf; path = ../src/fonts/PretendardVariable.ttf; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-DlidamApp-DlidamAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DlidamApp-DlidamAppTests.release.xcconfig"; path = "Target Support Files/Pods-DlidamApp-DlidamAppTests/Pods-DlidamApp-DlidamAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		AB67A7216B2C43EAA081350E /* Pretendard-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-SemiBold.ttf"; path = "../src/fonts/Pretendard-SemiBold.ttf"; sourceTree = "<group>"; };
+		AD465041A2BD4AD2B1DA4D10 /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-ExtraBold.otf"; path = "../src/fonts/Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
+		AE6DC53BB9984FD588EAE122 /* Pretendard-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-ExtraBold.ttf"; path = "../src/fonts/Pretendard-ExtraBold.ttf"; sourceTree = "<group>"; };
+		B2B66086E819436E97B8FF05 /* Pretendard-Thin.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Thin.otf"; path = "../src/fonts/Pretendard-Thin.otf"; sourceTree = "<group>"; };
+		B51F917CD92F46F2AD09D7D0 /* Pretendard-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Thin.ttf"; path = "../src/fonts/Pretendard-Thin.ttf"; sourceTree = "<group>"; };
+		B789AC92ED1148B995B76107 /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-ExtraLight.otf"; path = "../src/fonts/Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
+		BECAC077D150440BB4F054C0 /* Pretendard-Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Light.otf"; path = "../src/fonts/Pretendard-Light.otf"; sourceTree = "<group>"; };
+		DD26AA74CD6347FF9563653A /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-SemiBold.otf"; path = "../src/fonts/Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
+		DFE934097EBC41C7883ED66A /* Pretendard-Medium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Medium.otf"; path = "../src/fonts/Pretendard-Medium.otf"; sourceTree = "<group>"; };
+		E331BD6BDB634F7C80D83F2B /* Pretendard-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Medium.ttf"; path = "../src/fonts/Pretendard-Medium.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		551FCB8F956345148C94B15D /* Pretendard-Black.otf */ = {isa = PBXFileReference; name = "Pretendard-Black.otf"; path = "../src/fonts/Pretendard-Black.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		55AAB04B81A246FCB2752076 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; name = "Pretendard-Bold.otf"; path = "../src/fonts/Pretendard-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		AD465041A2BD4AD2B1DA4D10 /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; name = "Pretendard-ExtraBold.otf"; path = "../src/fonts/Pretendard-ExtraBold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		B789AC92ED1148B995B76107 /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; name = "Pretendard-ExtraLight.otf"; path = "../src/fonts/Pretendard-ExtraLight.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		BECAC077D150440BB4F054C0 /* Pretendard-Light.otf */ = {isa = PBXFileReference; name = "Pretendard-Light.otf"; path = "../src/fonts/Pretendard-Light.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		DFE934097EBC41C7883ED66A /* Pretendard-Medium.otf */ = {isa = PBXFileReference; name = "Pretendard-Medium.otf"; path = "../src/fonts/Pretendard-Medium.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		241BD6C451E443A9A4B89224 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; name = "Pretendard-Regular.otf"; path = "../src/fonts/Pretendard-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		DD26AA74CD6347FF9563653A /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; name = "Pretendard-SemiBold.otf"; path = "../src/fonts/Pretendard-SemiBold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		B2B66086E819436E97B8FF05 /* Pretendard-Thin.otf */ = {isa = PBXFileReference; name = "Pretendard-Thin.otf"; path = "../src/fonts/Pretendard-Thin.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		58AAE819706449959113A853 /* Pretendard-Black.ttf */ = {isa = PBXFileReference; name = "Pretendard-Black.ttf"; path = "../src/fonts/Pretendard-Black.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		1FE66FD01CA646E6BDC8DC16 /* Pretendard-Bold.ttf */ = {isa = PBXFileReference; name = "Pretendard-Bold.ttf"; path = "../src/fonts/Pretendard-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		AE6DC53BB9984FD588EAE122 /* Pretendard-ExtraBold.ttf */ = {isa = PBXFileReference; name = "Pretendard-ExtraBold.ttf"; path = "../src/fonts/Pretendard-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		647AD92527DF4BACAB99935A /* Pretendard-ExtraLight.ttf */ = {isa = PBXFileReference; name = "Pretendard-ExtraLight.ttf"; path = "../src/fonts/Pretendard-ExtraLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		2A7E4B4113FF4AECAB2EDA74 /* Pretendard-Light.ttf */ = {isa = PBXFileReference; name = "Pretendard-Light.ttf"; path = "../src/fonts/Pretendard-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		E331BD6BDB634F7C80D83F2B /* Pretendard-Medium.ttf */ = {isa = PBXFileReference; name = "Pretendard-Medium.ttf"; path = "../src/fonts/Pretendard-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		FF3F0A3F19D94201A9BADC2E /* Pretendard-Regular.ttf */ = {isa = PBXFileReference; name = "Pretendard-Regular.ttf"; path = "../src/fonts/Pretendard-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		AB67A7216B2C43EAA081350E /* Pretendard-SemiBold.ttf */ = {isa = PBXFileReference; name = "Pretendard-SemiBold.ttf"; path = "../src/fonts/Pretendard-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		B51F917CD92F46F2AD09D7D0 /* Pretendard-Thin.ttf */ = {isa = PBXFileReference; name = "Pretendard-Thin.ttf"; path = "../src/fonts/Pretendard-Thin.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		8498748BC0104CD38E8C785A /* PretendardVariable.ttf */ = {isa = PBXFileReference; name = "PretendardVariable.ttf"; path = "../src/fonts/PretendardVariable.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FF3F0A3F19D94201A9BADC2E /* Pretendard-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Regular.ttf"; path = "../src/fonts/Pretendard-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,19 +181,8 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				3B4392A12AC88292D35C810B /* Pods-DlidamApp.debug.xcconfig */,
-				5709B34CF0A7D63546082F79 /* Pods-DlidamApp.release.xcconfig */,
-				5B7EB9410499542E8C5724F5 /* Pods-DlidamApp-DlidamAppTests.debug.xcconfig */,
-				89C6BE57DB24E9ADA2F236DE /* Pods-DlidamApp-DlidamAppTests.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		B3D5F3DC16054906A910E6F9 /* Resources */ = {
-			isa = "PBXGroup";
+			isa = PBXGroup;
 			children = (
 				551FCB8F956345148C94B15D /* Pretendard-Black.otf */,
 				55AAB04B81A246FCB2752076 /* Pretendard-Bold.otf */,
@@ -216,8 +205,19 @@
 				8498748BC0104CD38E8C785A /* PretendardVariable.ttf */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
 			path = "";
+			sourceTree = "<group>";
+		};
+		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3B4392A12AC88292D35C810B /* Pods-DlidamApp.debug.xcconfig */,
+				5709B34CF0A7D63546082F79 /* Pods-DlidamApp.release.xcconfig */,
+				5B7EB9410499542E8C5724F5 /* Pods-DlidamApp-DlidamAppTests.debug.xcconfig */,
+				89C6BE57DB24E9ADA2F236DE /* Pods-DlidamApp-DlidamAppTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
