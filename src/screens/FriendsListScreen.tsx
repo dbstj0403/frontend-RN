@@ -1,4 +1,4 @@
-import React, {useState, useCallback, useRef} from 'react';
+import React, {useState, useCallback, useRef, useEffect} from 'react';
 import styled from 'styled-components/native';
 import {useNavigation, useFocusEffect} from '@react-navigation/native';
 import {
@@ -14,10 +14,19 @@ import ListItem from '../components/FriendsList/ListItem';
 import {globalStyles} from '../styles/globalStyles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api/config';
+import {useUserStore} from '../store/useUserStore';
+
+interface Friend {
+  friendId: string;
+  name: string;
+  statusMessage: string;
+  isDisabled: boolean;
+}
 
 export default function FriendsListScreen() {
   const navigation = useNavigation();
-  const [friendsList, setFriendsList] = useState([]);
+  const {userInfo, setUserInfo} = useUserStore();
+  const [friendsList, setFriendsList] = useState<Friend[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const lastUpdateTime = useRef(0);
@@ -26,8 +35,26 @@ export default function FriendsListScreen() {
     navigation.navigate('AddFriends');
   };
 
-  // 자신의 아이디 정보를 가져오는 함수
-  const getMyInfo = async () => {};
+  useEffect(() => {
+    const getMyInfo = async () => {
+      const token = await AsyncStorage.getItem('jwtAccessToken');
+      try {
+        const response = await api.get('/users/my-info', {
+          headers: {
+            Authorization: token,
+          },
+        });
+        if (response.status === 200) {
+          console.log('내 정보 불러오기 성공!', response.data);
+          setUserInfo(response.data);
+        }
+      } catch (e) {
+        console.log('내 정보 불러오기 실패', e);
+      }
+    };
+
+    getMyInfo();
+  }, [setUserInfo]);
 
   const getFriends = useCallback(
     async (forceUpdate = false) => {
@@ -44,7 +71,8 @@ export default function FriendsListScreen() {
       }
 
       setIsLoading(true);
-      setError(null);
+      setError('');
+
       const token = await AsyncStorage.getItem('jwtAccessToken');
       try {
         const response = await api.get('/friend/all', {
@@ -107,7 +135,14 @@ export default function FriendsListScreen() {
             />
             <View style={{marginBottom: 20}}>
               <Text style={globalStyles.bold12}>나의 프로필</Text>
-              {/* <ListItem /> */}
+              {userInfo && (
+                <ListItem
+                  id={userInfo.customId}
+                  name={userInfo.name}
+                  statusMessage="안녕 나 윤서얌"
+                  isDisabled={userInfo.isDisabled}
+                />
+              )}
             </View>
             <View style={{marginBottom: 20}}>
               <Text style={globalStyles.bold12}>즐겨찾기</Text>

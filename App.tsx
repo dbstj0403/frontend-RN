@@ -17,6 +17,7 @@ import AddFriendsScreen from './src/screens/AddFriendsScreen';
 import AddChatRoomScreen from './src/screens/AddChatRoomScreen';
 import ChattingRoomScreen from './src/screens/ChattingRoomScreen';
 import FriendsProfileScreen from './src/screens/FriendsProfileScreen';
+import MyProfileScreen from './src/screens/MyProfileScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -57,6 +58,7 @@ const App = () => {
         <Stack.Screen name="AddChatRoom" component={AddChatRoomScreen} />
         <Stack.Screen name="ChattingRoom" component={ChattingRoomScreen} />
         <Stack.Screen name="FriendsProfile" component={FriendsProfileScreen} />
+        <Stack.Screen name="MyProfile" component={MyProfileScreen} />
         <Stack.Screen name="Main" component={MainTabNavigator} />
       </Stack.Navigator>
     </NavigationContainer>
