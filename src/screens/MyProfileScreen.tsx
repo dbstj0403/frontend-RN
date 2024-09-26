@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import backgroundImage from '../assets/background/homeBackground.png';
 import styled from 'styled-components/native';
 import {useRoute} from '@react-navigation/native';
@@ -6,7 +6,7 @@ import {Image, TouchableOpacity, Text} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {globalStyles} from '../styles/globalStyles';
 
-export default function FriendsProfileScreen() {
+export default function MyProfileScreen() {
   const navigation = useNavigation();
 
   const moveToFriendsList = () => {
@@ -19,19 +19,6 @@ export default function FriendsProfileScreen() {
     name: string;
     statusMessage: string;
   };
-
-  const profileImages = [
-    require('../assets/profile/profile1.png'),
-    require('../assets/profile/profile2.png'),
-    require('../assets/profile/profile3.png'),
-  ];
-
-  const [randomImage, setRandomImage] = useState(profileImages[0]);
-
-  useEffect(() => {
-    const randomIndex = Math.floor(Math.random() * profileImages.length);
-    setRandomImage(profileImages[randomIndex]);
-  }, []);
 
   return (
     <ScreenContainer>
@@ -60,10 +47,9 @@ export default function FriendsProfileScreen() {
         </Header>
         <Container>
           <Image
-            source={randomImage}
+            source={require('../assets/profile/profileImg.png')}
             alt="Profile Image"
             style={{width: 270, height: 218}}
-            resizeMode="contain"
           />
           <Text style={globalStyles.bold40}>{name}</Text>
           <Text style={globalStyles.grayBold20}>{statusMessage}</Text>
