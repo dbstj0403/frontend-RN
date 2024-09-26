@@ -5,17 +5,24 @@ import {globalStyles} from '../../styles/globalStyles';
 import {useNavigation, NavigationProp} from '@react-navigation/native';
 
 type RootStackParamList = {
-  FriendsProfile: {id: string; name: string; statusMessage: string};
+  FriendsProfile: {
+    id: string;
+    name: string;
+    statusMessage: string;
+    isDisabled: boolean;
+  };
 };
 
 export default function ListItem({
   id,
   name,
   statusMessage,
+  isDisabled,
 }: {
   id: string;
   name: string;
   statusMessage: string;
+  isDisabled: boolean;
 }) {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
@@ -24,6 +31,7 @@ export default function ListItem({
       id,
       name,
       statusMessage,
+      isDisabled,
     });
   };
   return (

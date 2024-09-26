@@ -54,6 +54,7 @@ export default function ChattingRoomScreen() {
 
   const sendMessage = () => {
     if (message.trim() !== '' && socketRef.current) {
+      console.log(message, 'message');
       socketRef.current.emit('textMessage', message, 'dbstj0403', roomId);
       console.log('send message as ', message);
       setMessage('');

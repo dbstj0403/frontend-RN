@@ -124,6 +124,7 @@ export default function FriendsListScreen() {
                     id={friend.friendId}
                     name={friend.name}
                     statusMessage={friend.statusMessage}
+                    isDisabled={friend.isDisabled}
                   />
                 ))
               )}

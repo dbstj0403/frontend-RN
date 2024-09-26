@@ -9,16 +9,19 @@ import {globalStyles} from '../styles/globalStyles';
 export default function FriendsProfileScreen() {
   const navigation = useNavigation();
 
+  console.log('변경 사항');
   const moveToFriendsList = () => {
     navigation.navigate('FriendsList');
   };
 
   const route = useRoute();
-  const {id, name, statusMessage} = route.params as {
+  const {id, name, statusMessage, isDisabled} = route.params as {
     id: string;
     name: string;
     statusMessage: string;
+    isDisabled: boolean;
   };
+  console.log(isDisabled);
 
   const profileImages = [
     require('../assets/profile/profile1.png'),
@@ -59,12 +62,21 @@ export default function FriendsProfileScreen() {
           </IconContainer>
         </Header>
         <Container>
-          <Image
-            source={randomImage}
-            alt="Profile Image"
-            style={{width: 270, height: 218}}
-            resizeMode="contain"
-          />
+          {isDisabled ? (
+            <Image
+              source={require('../assets/profile/isDisabledProfile.png')}
+              alt="disabled"
+              style={{width: 270, height: 218}}
+              resizeMode="contain"
+            />
+          ) : (
+            <Image
+              source={randomImage}
+              alt="Profile Image"
+              style={{width: 270, height: 218}}
+              resizeMode="contain"
+            />
+          )}
           <Text style={globalStyles.bold40}>{name}</Text>
           <Text style={globalStyles.grayBold20}>{statusMessage}</Text>
         </Container>
