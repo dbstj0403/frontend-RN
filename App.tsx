@@ -8,11 +8,15 @@ import LandingScreen from './src/screens/LandingScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import SignUpScreen from './src/screens/SignUpScreen';
 import KakaoSignUpScreen from './src/screens/KakaoSignUpScreen';
+
 import FriendsListScreen from './src/screens/FriendsListScreen';
-import ChatRoomScreen from './src/screens/ChatRoomScreen';
+import ChatRoomListScreen from './src/screens/ChatRoomListScreen';
 import MenuTab from './src/components/layouts/MenuTab';
 import SettingsScreen from './src/screens/SettingsScreen';
 import AddFriendsScreen from './src/screens/AddFriendsScreen';
+import AddChatRoomScreen from './src/screens/AddChatRoomScreen';
+import ChattingRoomScreen from './src/screens/ChattingRoomScreen';
+import FriendsProfileScreen from './src/screens/FriendsProfileScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -26,8 +30,8 @@ function MainTabNavigator() {
         options={{title: 'List', headerShown: false}}
       />
       <Tab.Screen
-        name="ChatRoom"
-        component={ChatRoomScreen}
+        name="ChatRoomList"
+        component={ChatRoomListScreen}
         options={{title: 'Record', headerShown: false}}
       />
       <Tab.Screen
@@ -49,8 +53,10 @@ const App = () => {
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="KakaoSignUp" component={KakaoSignUpScreen} />
-        {/* <Stack.Screen name="FriendsList" component={MainTabNavigator} /> */}
         <Stack.Screen name="AddFriends" component={AddFriendsScreen} />
+        <Stack.Screen name="AddChatRoom" component={AddChatRoomScreen} />
+        <Stack.Screen name="ChattingRoom" component={ChattingRoomScreen} />
+        <Stack.Screen name="FriendsProfile" component={FriendsProfileScreen} />
         <Stack.Screen name="Main" component={MainTabNavigator} />
       </Stack.Navigator>
     </NavigationContainer>

@@ -19,12 +19,15 @@ export default function FriendsListScreen() {
   const navigation = useNavigation();
   const [friendsList, setFriendsList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
   const lastUpdateTime = useRef(0);
 
   const moveToAddFriends = () => {
     navigation.navigate('AddFriends');
   };
+
+  // 자신의 아이디 정보를 가져오는 함수
+  const getMyInfo = async () => {};
 
   const getFriends = useCallback(
     async (forceUpdate = false) => {
@@ -56,6 +59,7 @@ export default function FriendsListScreen() {
         }
       } catch (e) {
         console.log('친구 목록 불러오기 실패:', e);
+        console.log(e);
         setError('친구 목록을 불러오는데 실패했습니다.');
       } finally {
         setIsLoading(false);

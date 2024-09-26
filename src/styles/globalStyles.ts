@@ -1,10 +1,21 @@
 import {StyleSheet} from 'react-native';
 
 export const globalStyles = StyleSheet.create({
+  bold40: {
+    fontFamily: 'Pretendard-Bold',
+    lineHeight: 60,
+    fontSize: 40,
+  },
   bold20: {
     fontFamily: 'Pretendard-Bold',
     lineHeight: 24,
     fontSize: 20,
+  },
+  grayBold20: {
+    fontFamily: 'Pretendard-Bold',
+    lineHeight: 24,
+    fontSize: 20,
+    color: '#999999',
   },
   bold18: {
     fontFamily: 'Pretendard-Bold',

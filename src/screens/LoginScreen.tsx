@@ -97,7 +97,7 @@ const LoginScreen = ({navigation}) => {
       <ButtonContainer>
         <TouchableOpacity
           onPress={() => {
-            navigation.replace('FriendsList');
+            navigation.replace('Main');
           }}>
           <ButtonText style={globalStyles.semibold}>로그인</ButtonText>
         </TouchableOpacity>

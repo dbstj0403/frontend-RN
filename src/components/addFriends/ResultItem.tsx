@@ -27,14 +27,24 @@ export default function ReslutItem({
           },
         },
       );
-      if (response.status === 204) {
+      if (response.status === 200) {
         console.log('친구 추가 성공!');
-        Alert.alert(
-          '완료',
-          '친구 추가가 완료되었습니다!',
-          [{text: '확인', onPress: () => console.log('확인')}],
-          {cancelable: false},
-        );
+        console.log(response.data);
+        if (response.data.isSuccess === false) {
+          Alert.alert(
+            '알림',
+            '이미 친구인 사용자입니다.',
+            [{text: '확인', onPress: () => console.log('확인')}],
+            {cancelable: false},
+          );
+        } else {
+          Alert.alert(
+            '완료',
+            '친구 추가가 완료되었습니다!',
+            [{text: '확인', onPress: () => console.log('확인')}],
+            {cancelable: false},
+          );
+        }
       }
     } catch (e) {
       console.log(e);

@@ -148,6 +148,7 @@ export default function KakaoSignUpScreen({navigation}) {
   const goToFriendsListScreen = () => {
     navigation.replace('FriendsList');
   };
+
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <Container>

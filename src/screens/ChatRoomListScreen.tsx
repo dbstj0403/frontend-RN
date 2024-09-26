@@ -8,13 +8,21 @@ import {
   View,
   Image,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
 import ListItem from '../components/FriendsList/ListItem';
 import {globalStyles} from '../styles/globalStyles';
 import MenuTab from '../components/layouts/MenuTab';
 import ChatItem from '../components/chatRoom/ChatItem';
+import {useNavigation} from '@react-navigation/native';
 
-export default function FriendsListScreen() {
+export default function ChatRoomListScreen() {
+  const navigation = useNavigation();
+  const moveToAddChatRoom = () => {
+    navigation.navigate('AddChatRoom');
+  };
+
+  // 룸 리스트 가져오는 함수 필요
   return (
     <ScreenContainer>
       <BackgroundImage source={backgroundImage} resizeMode="cover" />
@@ -22,7 +30,6 @@ export default function FriendsListScreen() {
         <Container>
           <Header>
             <HeaderTitle>채팅</HeaderTitle>
-
             <View
               style={{
                 display: 'flex',
@@ -32,19 +39,21 @@ export default function FriendsListScreen() {
               }}>
               <Image
                 source={require('../assets/icons/searchIcon.png')}
-                alt="Add Friends"
+                alt="search"
                 style={{width: 27, height: 27, marginRight: 10}}
               />
-              <Image
-                source={require('../assets/icons/addFriendsIcon2.png')}
-                alt="Add Friends"
-                style={{
-                  width: 30,
-                  height: 30,
-                  position: 'relative',
-                  bottom: 0.8,
-                }}
-              />
+              <TouchableOpacity onPress={moveToAddChatRoom}>
+                <Image
+                  source={require('../assets/icons/addFriendsIcon2.png')}
+                  alt="Add Friends"
+                  style={{
+                    width: 30,
+                    height: 30,
+                    position: 'relative',
+                    bottom: 0.8,
+                  }}
+                />
+              </TouchableOpacity>
             </View>
           </Header>
           <ScrollView>

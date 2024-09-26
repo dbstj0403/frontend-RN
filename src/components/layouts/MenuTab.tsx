@@ -22,7 +22,7 @@ const iconMapping: IconMapping = {
     active: require('../../assets/icons/friendListIcon.png'),
     inactive: require('../../assets/icons/notFriendListIcon.png'),
   },
-  ChatRoom: {
+  ChatRoomList: {
     active: require('../../assets/icons/chatIcon.png'),
     inactive: require('../../assets/icons/notChatIcon.png'),
   },

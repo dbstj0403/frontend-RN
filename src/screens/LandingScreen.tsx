@@ -1,6 +1,6 @@
 // LandingScreen.js
 import React, {useEffect} from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, StyleSheet, Image} from 'react-native';
 import styled from 'styled-components/native';
 
 const LandingScreen = ({navigation}) => {

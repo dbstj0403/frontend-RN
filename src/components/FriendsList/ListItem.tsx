@@ -1,7 +1,13 @@
 import React from 'react';
-import {Image, Text, View} from 'react-native';
+import {Image, Pressable, Text, View} from 'react-native';
 import styled from 'styled-components/native';
 import {globalStyles} from '../../styles/globalStyles';
+import {useNavigation, NavigationProp} from '@react-navigation/native';
+
+type RootStackParamList = {
+  FriendsProfile: {id: string; name: string; statusMessage: string};
+};
+
 export default function ListItem({
   id,
   name,
@@ -11,8 +17,17 @@ export default function ListItem({
   name: string;
   statusMessage: string;
 }) {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
+  const moveToProfile = () => {
+    navigation.navigate('FriendsProfile', {
+      id,
+      name,
+      statusMessage,
+    });
+  };
   return (
-    <>
+    <Pressable onPress={moveToProfile}>
       <Container>
         <Image
           source={require('../../assets/icons/profileImg.png')}
@@ -22,7 +37,7 @@ export default function ListItem({
         <NameText style={globalStyles.bold18}>{name}</NameText>
         <Text style={globalStyles.grayRegular16}>{statusMessage}</Text>
       </Container>
-    </>
+    </Pressable>
   );
 }
 
