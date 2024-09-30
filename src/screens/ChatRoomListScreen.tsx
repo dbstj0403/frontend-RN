@@ -1,28 +1,55 @@
-import React from 'react';
+import React, {useState, useCallback} from 'react';
 import styled from 'styled-components/native';
 import backgroundImage from '../assets/background/homeBackground.png';
 import {
   Text,
   SafeAreaView,
-  StatusBar,
   View,
   Image,
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import ListItem from '../components/FriendsList/ListItem';
 import {globalStyles} from '../styles/globalStyles';
-import MenuTab from '../components/layouts/MenuTab';
 import ChatItem from '../components/chatRoom/ChatItem';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useFocusEffect} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import api from '../api/config';
 
 export default function ChatRoomListScreen() {
   const navigation = useNavigation();
+  const [chatRooms, setChatRooms] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const getChatRoomList = useCallback(async () => {
+    setIsLoading(true);
+    const token = await AsyncStorage.getItem('jwtAccessToken');
+    try {
+      const response = await api.get('/chat', {
+        headers: {
+          Authorization: token,
+        },
+      });
+      if (response.status === 200) {
+        console.log('채팅방 리스트 가져오기 성공!', response.data);
+        setChatRooms(response.data);
+      }
+    } catch (e) {
+      console.log('채팅방 리스트 불러오기 실패', e);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      getChatRoomList();
+    }, [getChatRoomList]),
+  );
+
   const moveToAddChatRoom = () => {
     navigation.navigate('AddChatRoom');
   };
 
-  // 룸 리스트 가져오는 함수 필요
   return (
     <ScreenContainer>
       <BackgroundImage source={backgroundImage} resizeMode="cover" />
@@ -32,9 +59,7 @@ export default function ChatRoomListScreen() {
             <HeaderTitle>채팅</HeaderTitle>
             <View
               style={{
-                display: 'flex',
                 flexDirection: 'row',
-                justifyContent: 'center',
                 alignItems: 'center',
               }}>
               <Image
@@ -46,12 +71,7 @@ export default function ChatRoomListScreen() {
                 <Image
                   source={require('../assets/icons/addFriendsIcon2.png')}
                   alt="Add Friends"
-                  style={{
-                    width: 30,
-                    height: 30,
-                    position: 'relative',
-                    bottom: 0.8,
-                  }}
+                  style={{width: 30, height: 30}}
                 />
               </TouchableOpacity>
             </View>
@@ -61,25 +81,22 @@ export default function ChatRoomListScreen() {
               <Text style={globalStyles.grayBold16}>당신의 대화를</Text>
               <Text style={globalStyles.grayBold16}>빠짐없이 기록할게요.</Text>
             </View>
-            <ChatItem />
-            <ChatItem />
-            <ChatItem />
-            <ChatItem />
-            <ChatItem />
-            <ChatItem />
-            <ChatItem />
-            <ChatItem />
-            <ChatItem />
-            <ChatItem />
-            <ChatItem />
-            <ChatItem />
-            <ChatItem />
+            {isLoading ? (
+              <Text>채팅방 목록을 불러오는 중...</Text>
+            ) : chatRooms.length > 0 ? (
+              chatRooms.map((room, index) => (
+                <ChatItem key={index} room={room} />
+              ))
+            ) : (
+              <Text>채팅방이 없습니다.</Text>
+            )}
           </ScrollView>
         </Container>
       </SafeAreaContainer>
     </ScreenContainer>
   );
 }
+
 const ScreenContainer = styled.View`
   flex: 1;
 `;
