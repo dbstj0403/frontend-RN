@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {Image, Text, TouchableOpacity} from 'react-native';
 import styled from 'styled-components/native';
 import {globalStyles} from '../../styles/globalStyles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -65,5 +65,5 @@ const Container = styled.View`
 `;
 
 const NameText = styled.Text`
-  margin-right: 10;
+  margin-right: 10px;
 `;

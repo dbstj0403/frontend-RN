@@ -84,5 +84,5 @@ const Container = styled.View`
 `;
 
 const NameText = styled.Text`
-  margin-right: 10;
+  margin-right: 10px;
 `;

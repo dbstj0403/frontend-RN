@@ -18,7 +18,7 @@ type NavigationProp = StackNavigationProp<RootStackParamList, 'ChattingRoom'>;
 type Message = {
   senderId: string;
   message: string;
-  roomId: string;
+  chatRoomId: string;
 };
 
 export default function ChattingRoomScreen() {
@@ -54,24 +54,15 @@ export default function ChattingRoomScreen() {
 
   const sendMessage = () => {
     if (message.trim() !== '' && socketRef.current) {
-      // socketRef.current.emit('textMessage', message, 'dbstj0403', roomId);
+      console.log('message', message);
       socketRef.current.emit(
         'textMessage',
-        {
-          message: message,
+        JSON.stringify({
+          chatRoomId: roomId,
+          message,
           senderId: 'dbstj0403',
-          roomId: roomId,
-        },
-        (ack: {status: string}) => {
-          console.log(ack);
-          if (ack && ack.status === 'ok') {
-            console.log('Message sent successfully:', message);
-          } else {
-            console.log('Message failed to send:', message);
-          }
-        },
+        }),
       );
-
       setMessage('');
     }
   };
