@@ -19,6 +19,10 @@ import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {globalStyles} from '../styles/globalStyles';
 
+import Sound from 'react-native-sound';
+import RNFS from 'react-native-fs';
+import {encode} from 'react-native-quick-base64';
+
 type RootStackParamList = {
   Main: undefined;
   ChattingRoom: {roomId: string};
@@ -29,7 +33,7 @@ type NavigationProp = StackNavigationProp<RootStackParamList, 'ChattingRoom'>;
 
 type Message = {
   senderId: string;
-  message: string;
+  message: string | ArrayBuffer;
   chatRoomId: string;
 };
 
@@ -41,6 +45,8 @@ export default function ChattingRoomScreen() {
   const [message, setMessage] = useState('');
   const [messageList, setMessageList] = useState<Message[]>([]);
   const socketRef = useRef<Socket | null>(null);
+
+  const [currentAudio, setCurrentAudio] = useState<Sound | null>(null);
 
   useEffect(() => {
     console.log('채팅룸 입장 후 소켓연결 시도@@!', roomId);
@@ -60,6 +66,10 @@ export default function ChattingRoomScreen() {
       if (socketRef.current) {
         socketRef.current.off('MessageData', receiveMessage);
         socketRef.current.disconnect();
+      }
+
+      if (currentAudio) {
+        currentAudio.release();
       }
     };
   }, [roomId]);
@@ -84,6 +94,45 @@ export default function ChattingRoomScreen() {
     setMessageList(prev => [...prev, res]);
   };
 
+  const isAudioMessage = (message: string | ArrayBuffer): boolean => {
+    return message instanceof ArrayBuffer;
+  };
+
+  const playAudio = async (audioData: ArrayBuffer) => {
+    if (currentAudio) {
+      currentAudio.stop();
+      currentAudio.release();
+    }
+
+    const filePath = `${RNFS.CachesDirectoryPath}/temp_audio_${Date.now()}.mp3`;
+    try {
+      await RNFS.writeFile(filePath, arrayBufferToBase64(audioData), 'base64');
+
+      const sound = new Sound(filePath, '', error => {
+        if (error) {
+          console.log('Failed to load the sound', error);
+          return;
+        }
+        setCurrentAudio(sound);
+        sound.play(success => {
+          if (success) {
+            console.log('Successfully finished playing');
+          } else {
+            console.log('Playback failed due to audio decoding errors');
+          }
+          sound.release();
+          RNFS.unlink(filePath);
+        });
+      });
+    } catch (error) {
+      console.error('Error playing audio:', error);
+    }
+  };
+
+  function arrayBufferToBase64(buffer: ArrayBuffer) {
+    return encode(new Uint8Array(buffer));
+  }
+
   // const renderItem = ({item}: {item: Message}) => (
   //   <MessageItem>
   //     <Text>
@@ -94,15 +143,27 @@ export default function ChattingRoomScreen() {
 
   const renderItem = ({item}: {item: Message}) => {
     const isMe = item.senderId === 'dbstj0403';
+    const isAudio = isAudioMessage(item.message);
     return (
       <MessageContainer isMe={isMe}>
         {!isMe && (
           <ProfileImage source={require('../assets/icons/profileImg.png')} />
         )}
         <MessageBubble isMe={isMe}>
-          <MessageText style={globalStyles.regular16} isMe={isMe}>
+          {/* <MessageText style={globalStyles.regular16} isMe={isMe}>
             {item.message}
-          </MessageText>
+          </MessageText> */}
+
+          {isAudio ? (
+            <TouchableOpacity
+              onPress={() => playAudio(item.message as ArrayBuffer)}>
+              <Text style={globalStyles.regular16}>🔊 음성 메시지 재생</Text>
+            </TouchableOpacity>
+          ) : (
+            <MessageText style={globalStyles.regular16} isMe={isMe}>
+              {item.message as string}
+            </MessageText>
+          )}
         </MessageBubble>
       </MessageContainer>
     );
