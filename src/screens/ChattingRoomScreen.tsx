@@ -1,11 +1,23 @@
 import React, {useEffect, useState, useRef} from 'react';
 import {RouteProp, useRoute} from '@react-navigation/native';
-import {TouchableOpacity, Text, TextInput, FlatList} from 'react-native';
+import backgroundImage from '../assets/background/homeBackground.png';
+import {
+  TouchableOpacity,
+  Text,
+  TextInput,
+  FlatList,
+  View,
+  Image,
+  SafeAreaView,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
 import styled from 'styled-components/native';
 import io, {Socket} from 'socket.io-client';
 import {CHAT_ENDPOINT} from 'react-native-dotenv';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
+import {globalStyles} from '../styles/globalStyles';
 
 type RootStackParamList = {
   Main: undefined;
@@ -72,55 +84,118 @@ export default function ChattingRoomScreen() {
     setMessageList(prev => [...prev, res]);
   };
 
-  const renderItem = ({item}: {item: Message}) => (
-    <MessageItem>
-      <Text>
-        {item.senderId}: {item.message}
-      </Text>
-    </MessageItem>
-  );
+  // const renderItem = ({item}: {item: Message}) => (
+  //   <MessageItem>
+  //     <Text>
+  //       {item.senderId}: {item.message}
+  //     </Text>
+  //   </MessageItem>
+  // );
+
+  const renderItem = ({item}: {item: Message}) => {
+    const isMe = item.senderId === 'dbstj0403';
+    return (
+      <MessageContainer isMe={isMe}>
+        {!isMe && (
+          <ProfileImage source={require('../assets/icons/profileImg.png')} />
+        )}
+        <MessageBubble isMe={isMe}>
+          <MessageText style={globalStyles.regular16} isMe={isMe}>
+            {item.message}
+          </MessageText>
+        </MessageBubble>
+      </MessageContainer>
+    );
+  };
 
   const moveToBack = () => {
-    navigation.navigate('Main');
+    navigation.navigate('ChatRoomList');
   };
 
   return (
     <Container>
-      <Text>안녕하세요! 채팅방에 오신 걸 환영합니당~~ 😽 RoomId: {roomId}</Text>
-      <TouchableOpacity onPress={moveToBack}>
-        <Text>뒤로 가기</Text>
-      </TouchableOpacity>
-      <ChatContainer>
-        <FlatList
-          data={messageList}
-          renderItem={renderItem}
-          keyExtractor={(_, index) => index.toString()}
-        />
-      </ChatContainer>
-      <InputContainer>
-        <StyledTextInput
-          placeholder="메세지를 입력해 주세요."
-          value={message}
-          onChangeText={setMessage}
-          placeholderTextColor="#999"
-        />
-        <SendButton onPress={sendMessage}>
-          <SendButtonText>전송</SendButtonText>
-        </SendButton>
-      </InputContainer>
+      <BackgroundImage source={backgroundImage} resizeMode="cover" />
+      <SafeAreaContainer>
+        <Header>
+          <TouchableOpacity onPress={moveToBack}>
+            <Image
+              source={require('../assets/icons/backwardIcon.png')}
+              alt="Login"
+              style={{width: 7.4, height: 12}}
+            />
+          </TouchableOpacity>
+          <Name style={globalStyles.semibold16}>최석환</Name>
+          <View style={{display: 'flex', flexDirection: 'row'}}>
+            <Image
+              source={require('../assets/icons/searchIcon.png')}
+              alt="search"
+              style={{width: 24, height: 24}}
+            />
+            <Image
+              source={require('../assets/icons/menuIcon.png')}
+              alt="search"
+              style={{width: 24, height: 24, marginLeft: 5}}
+            />
+          </View>
+        </Header>
+        {/* <Text>RoomId: {roomId}</Text> */}
+        <ChatContainer>
+          <FlatList
+            data={messageList}
+            renderItem={renderItem}
+            keyExtractor={(_, index) => index.toString()}
+          />
+        </ChatContainer>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+          <InputContainer>
+            <AttachmentButton>
+              <Image
+                source={require('../assets/icons/attachmentIcon.png')}
+                style={{width: 24, height: 24}}
+              />
+            </AttachmentButton>
+            <StyledTextInput
+              placeholder="메세지를 입력해 주세요."
+              value={message}
+              onChangeText={setMessage}
+              placeholderTextColor="#999"
+            />
+            <SendButton onPress={sendMessage}>
+              <Image
+                source={require('../assets/icons/sendIcon.png')}
+                style={{width: 12, height: 13}}
+              />
+            </SendButton>
+          </InputContainer>
+        </KeyboardAvoidingView>
+      </SafeAreaContainer>
     </Container>
   );
 }
 
 const Container = styled.View`
   flex: 1;
-  padding: 10px;
-  margin-top: 50px;
 `;
 
-const ChatContainer = styled.View`
+const SafeAreaContainer = styled.SafeAreaView`
+  flex: 1;
+`;
+
+const BackgroundImage = styled.Image`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+`;
+
+const Name = styled.Text`
+  margin-left: 50px;
+`;
+
+const ChatContainer = styled.ScrollView`
   flex: 1;
   margin-bottom: 10px;
+  margin-top: 10px;
 `;
 
 const MessageItem = styled.View`
@@ -130,25 +205,93 @@ const MessageItem = styled.View`
   margin-bottom: 5px;
 `;
 
+// const InputContainer = styled.View`
+//   flex-direction: row;
+//   align-items: center;
+// `;
+
+// const StyledTextInput = styled.TextInput`
+//   flex: 1;
+//   border: 1px solid #ccc;
+//   border-radius: 5px;
+//   padding: 10px;
+//   margin-right: 10px;
+// `;
+
+// const SendButton = styled.TouchableOpacity`
+//   background-color: #007bff;
+//   padding: 10px;
+//   border-radius: 5px;
+// `;
+
+// const SendButtonText = styled.Text`
+//   color: white;
+// `;
+
+const Header = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  border-bottom-width: 1px;
+  border-bottom-color: #dfdfdf;
+  padding-horizontal: 20px;
+`;
+
+const MessageContainer = styled.View<{isMe: boolean}>`
+  flex-direction: ${props => (props.isMe ? 'row-reverse' : 'row')};
+  margin-bottom: 10px;
+  padding-horizontal: 10px;
+  align-items: flex-end;
+`;
+
+const ProfileImage = styled.Image`
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  margin-right: 10px;
+`;
+
+const MessageBubble = styled.View<{isMe: boolean}>`
+  background-color: ${props => (props.isMe ? 'white' : 'black')};
+  padding: 10px;
+  border-radius: 4px;
+  max-width: 70%;
+
+  shadow-color: #000;
+  shadow-offset: 0px 1px;
+  shadow-opacity: 0.2;
+  shadow-radius: 2px;
+`;
+
+const MessageText = styled.Text<{isMe: boolean}>`
+  color: ${props => (props.isMe ? '#666666' : 'white')};
+`;
+
 const InputContainer = styled.View`
   flex-direction: row;
   align-items: center;
+  padding: 10px;
+  background-color: white;
+  border-top-width: 1px;
+  border-top-color: #e0e0e0;
+`;
+
+const AttachmentButton = styled.TouchableOpacity`
+  padding: 5px;
+  margin-right: 10px;
 `;
 
 const StyledTextInput = styled.TextInput`
   flex: 1;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-  margin-right: 10px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  padding: 10px 15px;
+  font-size: 16px;
+  color: #333;
 `;
 
 const SendButton = styled.TouchableOpacity`
-  background-color: #007bff;
-  padding: 10px;
-  border-radius: 5px;
-`;
-
-const SendButtonText = styled.Text`
-  color: white;
+  padding: 5px;
+  margin-left: 10px;
 `;
