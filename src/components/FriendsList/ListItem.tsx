@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, Pressable, Text, View} from 'react-native';
+import {Image, Pressable, Text} from 'react-native';
 import styled from 'styled-components/native';
 import {globalStyles} from '../../styles/globalStyles';
 import {useNavigation, NavigationProp} from '@react-navigation/native';
@@ -43,7 +43,9 @@ export default function ListItem({
           style={{width: 35, height: 35, marginRight: 15}}
         />
         <NameText style={globalStyles.bold18}>{name}</NameText>
-        <Text style={globalStyles.grayRegular16}>{statusMessage}</Text>
+        <Text style={globalStyles.grayRegular16}>
+          {statusMessage ? statusMessage : '상태 메세지가 없습니다.'}
+        </Text>
       </Container>
     </Pressable>
   );

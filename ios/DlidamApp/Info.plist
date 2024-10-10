@@ -7,6 +7,13 @@
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>앱이 음성 인식을 위해 스피치 인식에 접근합니다.</string>
 
+	<key>NSDocumentsFolderUsageDescription</key>
+	<string>앱이 파일에 접근하기 위해 필요합니다.</string>
+	<key>NSLibraryFolderUsageDescription</key>
+	<string>앱이 파일에 접근하기 위해 필요합니다.</string>
+	<key>NSFileSystemUsageDescription</key>
+	<string>앱이 파일 시스템에 접근하기 위해 필요합니다.</string>
+
 	<key>UIBackgroundModes</key>
 	<array>
     	<string>audio</string>

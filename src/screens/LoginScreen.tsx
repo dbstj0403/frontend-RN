@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import api from '../api/config';
 import {SERVER_URL} from 'react-native-dotenv';
-console.log(SERVER_URL);
 import {
   View,
   Text,
@@ -42,7 +41,6 @@ const LoginScreen = ({navigation}) => {
   };
 
   const sendToken = async (accessToken: string) => {
-    console.log(SERVER_URL);
     try {
       const response = await api.post('/oauth2/login/KAKAO', {
         accessToken: accessToken,

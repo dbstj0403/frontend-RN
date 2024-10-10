@@ -56,7 +56,7 @@ export default function AddFriendsScreen() {
         console.log(response.data);
         setSearchResult(response.data);
       }
-    } catch (e) {
+    } catch (e: any) {
       console.log(e);
       if (e.response && e.response.status === 500) {
         console.log('no users!');

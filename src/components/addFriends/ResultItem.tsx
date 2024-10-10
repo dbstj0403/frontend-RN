@@ -16,7 +16,6 @@ export default function ReslutItem({
 }) {
   const addFriend = async () => {
     const token = await AsyncStorage.getItem('jwtAccessToken');
-    console.log(token, id);
     try {
       const response = await api.post(
         '/friend/add',

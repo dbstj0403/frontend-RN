@@ -5,6 +5,13 @@ import {globalStyles} from '../../styles/globalStyles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../../api/config';
 import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+
+type RootStackParamList = {
+  ChattingRoom: {roomId: string; name: string};
+};
+
+type NavigationProp = StackNavigationProp<RootStackParamList, 'ChattingRoom'>;
 
 export default function FriendSearchItem({
   id,
@@ -13,7 +20,8 @@ export default function FriendSearchItem({
   id: string;
   name: string;
 }) {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp>();
+
   const createChatRoom = async () => {
     const token = await AsyncStorage.getItem('jwtAccessToken');
     try {
@@ -31,7 +39,10 @@ export default function FriendSearchItem({
       if (response.status === 200) {
         console.log('roomId', response.data.chatRoomId);
         console.log('Create Chatting room successfully! data: ', response.data);
-        navigation.navigate('ChattingRoom', {roomId: response.data.chatRoomId});
+        navigation.navigate('ChattingRoom', {
+          roomId: response.data.chatRoomId,
+          name: name,
+        });
       }
     } catch (e) {
       console.log('failed to create chatting room!', e);
