@@ -91,7 +91,7 @@ export default function AddChatRoomScreen() {
             />
           </TouchableOpacity>
           <Text style={globalStyles.semibold16}>대화 상대 선택</Text>
-          <View style={{width: 15}}></View>
+          <View style={{width: 15}} />
         </Header>
         <Container>
           <View

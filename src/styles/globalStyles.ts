@@ -11,6 +11,11 @@ export const globalStyles = StyleSheet.create({
     lineHeight: 24,
     fontSize: 20,
   },
+  bold24: {
+    fontFamily: 'Pretendard-Bold',
+    lineHeight: 36,
+    fontSize: 24,
+  },
   grayBold20: {
     fontFamily: 'Pretendard-Bold',
     lineHeight: 24,
@@ -41,6 +46,11 @@ export const globalStyles = StyleSheet.create({
   bold12: {
     fontFamily: 'Pretendard-Bold',
     fontSize: 12,
+    lineHeight: 15,
+  },
+  bold14: {
+    fontFamily: 'Pretendard-Bold',
+    fontSize: 14,
     lineHeight: 15,
   },
   regular16: {
@@ -74,6 +84,18 @@ export const globalStyles = StyleSheet.create({
     fontFamily: 'Pretendard-SemiBold',
     fontSize: 12,
     lineHeight: 15,
+  },
+  greySemibold: {
+    fontFamily: 'Pretendard-SemiBold',
+    fontSize: 12,
+    lineHeight: 15,
+    color: '#666666',
+  },
+  whiteSemibold: {
+    fontFamily: 'Pretendard-SemiBold',
+    fontSize: 12,
+    lineHeight: 15,
+    color: 'white',
   },
   caption: {
     fontFamily: 'Pretendard-Bold',

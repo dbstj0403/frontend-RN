@@ -7,7 +7,7 @@ import {
   Image,
   Alert,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, StackActions} from '@react-navigation/native';
 import {logout} from '@react-native-seoul/kakao-login';
 import styled from 'styled-components/native';
 import backgroundImage from '../assets/background/homeBackground.png';
@@ -26,7 +26,12 @@ export default function SettingsScreen() {
         [
           {
             text: '확인',
-            onPress: () => navigation.navigate('Login'), // 확인 누를 시 로그인 화면으로 이동
+            onPress: () => {
+              navigation.reset({
+                index: 0,
+                routes: [{name: 'Login'}], // 스택을 초기화하고 Login으로 이동
+              });
+            },
           },
         ],
         {cancelable: false},
@@ -38,6 +43,10 @@ export default function SettingsScreen() {
 
   const goToUseGuide = () => {
     navigation.navigate('Guide');
+  };
+
+  const goToWithdrawal = () => {
+    navigation.navigate('Withdrawal');
   };
 
   return (
@@ -117,7 +126,7 @@ export default function SettingsScreen() {
               <Text style={globalStyles.bold18}>로그아웃</Text>
             </MenuItem>
 
-            <MenuItem onPress={kakaoLogout}>
+            <MenuItem onPress={goToWithdrawal}>
               <ImageWrapper>
                 <Image
                   source={require('../assets/setting/cancel.png')}
