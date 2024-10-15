@@ -87,7 +87,7 @@ export default function AddFriendsScreen() {
             />
           </TouchableOpacity>
           <Text style={globalStyles.semibold16}>아이디로 친구 추가하기</Text>
-          <View style={{width: 15}}></View>
+          <View style={{width: 5}} />
         </Header>
         <Container>
           <View style={{marginTop: 40}}>

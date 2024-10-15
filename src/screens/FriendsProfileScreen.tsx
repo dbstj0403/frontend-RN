@@ -29,12 +29,19 @@ export default function FriendsProfileScreen() {
     require('../assets/profile/profile3.png'),
   ];
 
+  const disabledProfileImages = [
+    require('../assets/profile/isDisabledProfile1.png'),
+    require('../assets/profile/isDisabledProfile2.png'),
+    require('../assets/profile/isDisabledProfile3.png'),
+  ];
+
   const [randomImage, setRandomImage] = useState(profileImages[0]);
 
   useEffect(() => {
-    const randomIndex = Math.floor(Math.random() * profileImages.length);
-    setRandomImage(profileImages[randomIndex]);
-  }, []);
+    const images = isDisabled ? disabledProfileImages : profileImages;
+    const randomIndex = Math.floor(Math.random() * images.length);
+    setRandomImage(images[randomIndex]);
+  }, [isDisabled]);
 
   return (
     <ScreenContainer>
@@ -64,7 +71,7 @@ export default function FriendsProfileScreen() {
         <Container>
           {isDisabled ? (
             <Image
-              source={require('../assets/profile/isDisabledProfile.png')}
+              source={randomImage}
               alt="disabled"
               style={{width: 270, height: 218}}
               resizeMode="contain"
