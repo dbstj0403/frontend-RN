@@ -49,6 +49,10 @@ export default function SettingsScreen() {
     navigation.navigate('Withdrawal');
   };
 
+  const goToModify = () => {
+    navigation.navigate('ModifyProfile');
+  };
+
   return (
     <ScreenContainer>
       <BackgroundImage source={backgroundImage} resizeMode="cover" />
@@ -66,7 +70,7 @@ export default function SettingsScreen() {
             alt="settingImg"
           />
           <MenuContainer>
-            <MenuItem>
+            <MenuItem onPress={goToModify}>
               <ImageWrapper>
                 <Image
                   source={require('../assets/setting/person.png')}

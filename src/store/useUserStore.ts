@@ -4,6 +4,8 @@ interface UserInfo {
   customId: string;
   name: string;
   isDisabled: boolean;
+  phoneNumber: string;
+  voiceType: string | null;
 }
 
 interface UserStore {

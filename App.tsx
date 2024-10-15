@@ -19,7 +19,8 @@ import ChattingRoomScreen from './src/screens/ChattingRoomScreen';
 import FriendsProfileScreen from './src/screens/FriendsProfileScreen';
 import MyProfileScreen from './src/screens/MyProfileScreen';
 import UseGuideScreen from './src/screens/UseGuideScreen';
-import Withdrawalcreen from './src/screens/WithdrawalScreen';
+import Withdrawalscreen from './src/screens/WithdrawalScreen';
+import ModifyProfilescreen from './src/screens/ModifyProfileScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -79,7 +80,8 @@ const App = () => {
         <Stack.Screen name="FriendsProfile" component={FriendsProfileScreen} />
         <Stack.Screen name="MyProfile" component={MyProfileScreen} />
         <Stack.Screen name="Main" component={MainTabNavigator} />
-        <Stack.Screen name="Withdrawal" component={Withdrawalcreen} />
+        <Stack.Screen name="Withdrawal" component={Withdrawalscreen} />
+        <Stack.Screen name="ModifyProfile" component={ModifyProfilescreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
