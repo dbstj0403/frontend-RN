@@ -57,6 +57,7 @@ export default function ChatRoomListScreen() {
         <Container>
           <Header>
             <HeaderTitle>채팅</HeaderTitle>
+
             <View
               style={{
                 flexDirection: 'row',
@@ -76,11 +77,18 @@ export default function ChatRoomListScreen() {
               </TouchableOpacity>
             </View>
           </Header>
-          <ScrollView>
-            <View style={{marginTop: 10, marginBottom: 20}}>
+          <ScrollView
+            showsVerticalScrollIndicator={false} // 세로 스크롤바 숨기기
+            showsHorizontalScrollIndicator={false} // 가로 스크롤바 숨기기
+          >
+            <View style={{marginTop: 10}}>
               <Text style={globalStyles.grayBold16}>당신의 대화를</Text>
               <Text style={globalStyles.grayBold16}>빠짐없이 기록할게요.</Text>
             </View>
+            <TopImage
+              source={require('../assets/chatRoomList/chatRoomListTopImg.png')}
+              alt="chatRoomListImg"
+            />
             {isLoading ? (
               <Text>채팅방 목록을 불러오는 중...</Text>
             ) : chatRooms.length > 0 ? (
@@ -126,4 +134,10 @@ const Header = styled.View`
 const HeaderTitle = styled.Text`
   font-size: 20px;
   font-weight: bold;
+`;
+
+const TopImage = styled.Image`
+  width: 345px;
+  height: 140px;
+  margin-bottom: 10px;
 `;

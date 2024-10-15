@@ -125,6 +125,8 @@ export default function FriendsListScreen() {
             </TouchableOpacity>
           </Header>
           <ScrollView
+            showsVerticalScrollIndicator={false} // 세로 스크롤바 숨기기
+            showsHorizontalScrollIndicator={false} // 가로 스크롤바 숨기기
             refreshControl={
               <RefreshControl refreshing={isLoading} onRefresh={onRefresh} />
             }>
@@ -141,6 +143,7 @@ export default function FriendsListScreen() {
                   name={userInfo.name}
                   statusMessage="안녕 나 윤서얌"
                   isDisabled={userInfo.isDisabled}
+                  isFavorite={false}
                 />
               )}
             </View>
@@ -160,6 +163,7 @@ export default function FriendsListScreen() {
                     name={friend.name}
                     statusMessage={friend.statusMessage}
                     isDisabled={friend.isDisabled}
+                    isFavorite={false}
                   />
                 ))
               )}

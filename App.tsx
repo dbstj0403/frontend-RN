@@ -18,10 +18,30 @@ import AddChatRoomScreen from './src/screens/AddChatRoomScreen';
 import ChattingRoomScreen from './src/screens/ChattingRoomScreen';
 import FriendsProfileScreen from './src/screens/FriendsProfileScreen';
 import MyProfileScreen from './src/screens/MyProfileScreen';
+import UseGuideScreen from './src/screens/UseGuideScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+const SettingStack = createStackNavigator();
 
+function SettingsStackNavigator() {
+  return (
+    <NavigationContainer independent={true}>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Settings"
+          component={SettingsScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Guide"
+          component={UseGuideScreen}
+          options={{title: '사용 가이드'}}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
 function MainTabNavigator() {
   return (
     <Tab.Navigator tabBar={props => <MenuTab {...props} />}>
@@ -37,7 +57,7 @@ function MainTabNavigator() {
       />
       <Tab.Screen
         name="Settings"
-        component={SettingsScreen}
+        component={SettingsStackNavigator}
         options={{title: 'Settings', headerShown: false}}
       />
     </Tab.Navigator>
