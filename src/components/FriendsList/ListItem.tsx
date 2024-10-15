@@ -1,10 +1,11 @@
 import React from 'react';
-import {Image, Pressable, Text, View} from 'react-native';
+import {Image, Pressable, Text, TouchableOpacity, View} from 'react-native';
 import styled from 'styled-components/native';
 import {globalStyles} from '../../styles/globalStyles';
 import {useNavigation, NavigationProp} from '@react-navigation/native';
 import {useUserStore} from '../../store/useUserStore';
 import api from '../../api/config';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type RootStackParamList = {
   FriendsProfile: {
@@ -21,17 +22,44 @@ export default function ListItem({
   statusMessage,
   isDisabled,
   isFavorite,
+  updateFriendsList,
+  updateFriendStatus,
 }: {
   id: string;
   name: string;
   statusMessage: string;
   isDisabled: boolean;
   isFavorite: boolean;
+  updateFriendsList: () => void;
+  updateFriendStatus: (friendId: string, isFavorite: boolean) => void;
 }) {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const {userInfo} = useUserStore();
 
-  const toggleFavorite = () => {};
+  const toggleFavorite = async () => {
+    const token = await AsyncStorage.getItem('jwtAccessToken');
+    try {
+      const response = await api.post(
+        '/friend/favorite',
+        {customId: id},
+        {
+          headers: {
+            Authorization: token,
+          },
+        },
+      );
+      if (response.status === 204) {
+        console.log('toggle complete!', response.data);
+        updateFriendStatus(id, !isFavorite); // 즉시 UI 업데이트
+        updateFriendsList(); // 백그라운드에서 전체 목록 업데이트
+      }
+    } catch (e: any) {
+      console.log(e);
+      if (e.response && e.response.status === 500) {
+        console.log('error', e);
+      }
+    }
+  };
 
   const moveToProfile = () => {
     navigation.navigate('FriendsProfile', {
@@ -77,21 +105,21 @@ export default function ListItem({
         </View>
 
         {isFavorite ? (
-          <Pressable>
+          <TouchableOpacity onPress={toggleFavorite}>
             <Image
               source={require('../../assets/icons/favoriteIcon.png')}
               alt="favorite"
               style={{width: 20, height: 19, marginBottom: 10}}
             />
-          </Pressable>
+          </TouchableOpacity>
         ) : (
-          <Pressable>
+          <TouchableOpacity onPress={toggleFavorite}>
             <Image
               source={require('../../assets/icons/notFavoriteIcon.png')}
               alt="notFavorite"
               style={{width: 20, height: 19, marginBottom: 10}}
             />
-          </Pressable>
+          </TouchableOpacity>
         )}
       </Container>
     </Pressable>

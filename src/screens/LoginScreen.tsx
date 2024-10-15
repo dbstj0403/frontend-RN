@@ -44,7 +44,6 @@ const LoginScreen = ({navigation}) => {
     try {
       const response = await api.post('/oauth2/login/KAKAO', {
         accessToken: accessToken,
-        deviceToken: 1,
       });
       if (response.status === 200) {
         console.log('kakao token 보낸 함수 응답:', response.data);

@@ -21,12 +21,15 @@ interface Friend {
   name: string;
   statusMessage: string;
   isDisabled: boolean;
+  friendType: 'FRIEND' | 'CLOSE_FRIEND';
 }
 
 export default function FriendsListScreen() {
   const navigation = useNavigation();
   const {userInfo, setUserInfo} = useUserStore();
-  const [friendsList, setFriendsList] = useState<Friend[]>([]);
+  const [allFriends, setAllFriends] = useState<Friend[]>([]);
+  const [closeFriends, setCloseFriends] = useState<Friend[]>([]);
+  const [regularFriends, setRegularFriends] = useState<Friend[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const lastUpdateTime = useRef(0);
@@ -56,44 +59,74 @@ export default function FriendsListScreen() {
     getMyInfo();
   }, [setUserInfo]);
 
-  const getFriends = useCallback(
-    async (forceUpdate = false) => {
-      const currentTime = Date.now();
-      const timeSinceLastUpdate = currentTime - lastUpdateTime.current;
+  const getFriends = useCallback(async (forceUpdate = false) => {
+    const currentTime = Date.now();
+    const timeSinceLastUpdate = currentTime - lastUpdateTime.current;
 
-      // 마지막 업데이트 후 5분(300000ms) 이내라면 업데이트 하지 않음
-      if (
-        !forceUpdate &&
-        timeSinceLastUpdate < 300000 &&
-        friendsList.length > 0
-      ) {
-        return;
+    if (!forceUpdate && timeSinceLastUpdate < 300000) {
+      return;
+    }
+
+    setIsLoading(true);
+    setError('');
+
+    const token = await AsyncStorage.getItem('jwtAccessToken');
+    try {
+      const response = await api.get('/friend/all', {
+        headers: {
+          Authorization: token,
+        },
+      });
+      if (response.status === 200) {
+        console.log('친구 목록 불러오기 성공!', response.data);
+        const friends: Friend[] = response.data;
+        setAllFriends(friends);
+
+        const close = friends.filter(
+          friend => friend.friendType === 'CLOSE_FRIEND',
+        );
+        const regular = friends.filter(
+          friend => friend.friendType === 'FRIEND',
+        );
+
+        setCloseFriends(close);
+        setRegularFriends(regular);
+
+        lastUpdateTime.current = currentTime;
       }
+    } catch (e) {
+      console.log('친구 목록 불러오기 실패:', e);
+      setError('친구 목록을 불러오는데 실패했습니다.');
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
-      setIsLoading(true);
-      setError('');
+  const updateFriendStatus = useCallback(
+    (friendId: string, isFavorite: boolean) => {
+      setAllFriends(prev =>
+        prev.map(friend =>
+          friend.friendId === friendId
+            ? {...friend, friendType: isFavorite ? 'CLOSE_FRIEND' : 'FRIEND'}
+            : friend,
+        ),
+      );
 
-      const token = await AsyncStorage.getItem('jwtAccessToken');
-      try {
-        const response = await api.get('/friend/all', {
-          headers: {
-            Authorization: token,
-          },
-        });
-        if (response.status === 200) {
-          console.log('친구 목록 불러오기 성공!', response.data);
-          setFriendsList(response.data);
-          lastUpdateTime.current = currentTime;
-        }
-      } catch (e) {
-        console.log('친구 목록 불러오기 실패:', e);
-        console.log(e);
-        setError('친구 목록을 불러오는데 실패했습니다.');
-      } finally {
-        setIsLoading(false);
+      if (isFavorite) {
+        setCloseFriends(prev => [
+          ...prev,
+          allFriends.find(f => f.friendId === friendId)!,
+        ]);
+        setRegularFriends(prev => prev.filter(f => f.friendId !== friendId));
+      } else {
+        setRegularFriends(prev => [
+          ...prev,
+          allFriends.find(f => f.friendId === friendId)!,
+        ]);
+        setCloseFriends(prev => prev.filter(f => f.friendId !== friendId));
       }
     },
-    [friendsList.length],
+    [allFriends],
   );
 
   useFocusEffect(
@@ -125,8 +158,8 @@ export default function FriendsListScreen() {
             </TouchableOpacity>
           </Header>
           <ScrollView
-            showsVerticalScrollIndicator={false} // 세로 스크롤바 숨기기
-            showsHorizontalScrollIndicator={false} // 가로 스크롤바 숨기기
+            showsVerticalScrollIndicator={false}
+            showsHorizontalScrollIndicator={false}
             refreshControl={
               <RefreshControl refreshing={isLoading} onRefresh={onRefresh} />
             }>
@@ -144,19 +177,32 @@ export default function FriendsListScreen() {
                   statusMessage="안녕 나 윤서얌"
                   isDisabled={userInfo.isDisabled}
                   isFavorite={false}
+                  updateFriendsList={getFriends}
+                  updateFriendStatus={updateFriendStatus}
                 />
               )}
             </View>
             <View style={{marginBottom: 20}}>
               <Text style={globalStyles.bold12}>즐겨찾기</Text>
-              {/* <ListItem /> */}
+              {closeFriends.map(friend => (
+                <ListItem
+                  key={friend.friendId}
+                  id={friend.friendId}
+                  name={friend.name}
+                  statusMessage={friend.statusMessage}
+                  isDisabled={friend.isDisabled}
+                  isFavorite={true}
+                  updateFriendsList={getFriends}
+                  updateFriendStatus={updateFriendStatus}
+                />
+              ))}
             </View>
             <View style={{marginBottom: 20}}>
               <Text style={globalStyles.bold12}>목록</Text>
               {error ? (
                 <Text style={{color: 'red'}}>{error}</Text>
               ) : (
-                friendsList.map(friend => (
+                regularFriends.map(friend => (
                   <ListItem
                     key={friend.friendId}
                     id={friend.friendId}
@@ -164,6 +210,8 @@ export default function FriendsListScreen() {
                     statusMessage={friend.statusMessage}
                     isDisabled={friend.isDisabled}
                     isFavorite={false}
+                    updateFriendsList={getFriends}
+                    updateFriendStatus={updateFriendStatus}
                   />
                 ))
               )}
