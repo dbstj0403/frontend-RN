@@ -1,11 +1,10 @@
 import React from 'react';
-import {Image, Text, View} from 'react-native';
+import {Image, Text, View, Alert, TouchableOpacity} from 'react-native';
 import styled from 'styled-components/native';
 import {globalStyles} from '../../styles/globalStyles';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 
-// 네비게이션 파라미터 타입 정의
 type RootStackParamList = {
   ChattingRoom: {roomId: string; name: string};
   // 다른 스크린들도 여기에 추가...
@@ -13,14 +12,19 @@ type RootStackParamList = {
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'ChattingRoom'>;
 
-// room prop의 타입을 명시적으로 정의
 type Room = {
   chatRoomId: string;
   partnerName: string;
   lastChatMessage?: string;
 };
 
-export default function ChatItem({room}: {room: Room}) {
+export default function ChatItem({
+  room,
+  leaveChatRoom,
+}: {
+  room: Room;
+  leaveChatRoom: (roomId: string) => void;
+}) {
   const navigation = useNavigation<NavigationProp>();
 
   const moveToChattingRoom = () => {
@@ -30,40 +34,62 @@ export default function ChatItem({room}: {room: Room}) {
     });
   };
 
+  const handleLongPress = () => {
+    Alert.alert(
+      '채팅방 나가기',
+      `${room.partnerName}님과의 채팅방에서 나가시겠습니까?`,
+      [
+        {text: '취소', style: 'cancel'},
+        {
+          text: '나가기',
+          onPress: () => leaveChatRoom(room.chatRoomId),
+          style: 'destructive',
+        },
+      ],
+      {cancelable: true},
+    );
+  };
+
   return (
-    <>
-      <Container onPress={moveToChattingRoom}>
-        <Image
-          source={require('../../assets/icons/profileImg.png')}
-          alt="profile"
-          style={{width: 40, height: 40, marginRight: 10}}
-        />
-        <ContentContainer>
-          <Text style={globalStyles.bold18}>{room.partnerName}</Text>
-          <Text style={globalStyles.grayRegular16}>
-            {room.lastChatMessage
-              ? room.lastChatMessage
-              : '마지막 메세지가 없습니다.'}
-          </Text>
-        </ContentContainer>
-      </Container>
-    </>
+    <Container
+      onPress={moveToChattingRoom}
+      onLongPress={handleLongPress}
+      delayLongPress={500}>
+      <Image
+        source={require('../../assets/icons/profileImg.png')}
+        alt="profile"
+        style={{width: 40, height: 40, marginRight: 10}}
+      />
+      <ContentContainer>
+        <NameText style={globalStyles.bold18}>{room.partnerName}</NameText>
+        <MessageText style={globalStyles.grayRegular16}>
+          {room.lastChatMessage
+            ? room.lastChatMessage
+            : '마지막 메세지가 없습니다.'}
+        </MessageText>
+      </ContentContainer>
+    </Container>
   );
 }
 
-const Container = styled.TouchableOpacity`
+const Container = styled(TouchableOpacity)`
   width: 100%;
-  display: flex;
   flex-direction: row;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  height: 50px;
+  align-items: center;
+  padding: 10px 0;
 `;
 
 const ContentContainer = styled.View`
-  display: flex;
+  flex: 1;
   flex-direction: column;
+  justify-content: center;
   margin-left: 10px;
-  height: 50px;
-  justify-content: space-between;
+`;
+
+const NameText = styled.Text`
+  margin-bottom: 5px;
+`;
+
+const MessageText = styled.Text`
+  color: #888;
 `;

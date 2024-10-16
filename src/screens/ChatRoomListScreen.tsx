@@ -8,6 +8,7 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import {globalStyles} from '../styles/globalStyles';
 import ChatItem from '../components/chatRoom/ChatItem';
@@ -50,6 +51,27 @@ export default function ChatRoomListScreen() {
     navigation.navigate('AddChatRoom');
   };
 
+  const leaveChatRoom = useCallback(async roomId => {
+    const token = await AsyncStorage.getItem('jwtAccessToken');
+    try {
+      const response = await api.delete(`/chat/${roomId}`, {
+        headers: {
+          Authorization: token,
+        },
+      });
+      if (response.status === 204) {
+        console.log('채팅방 나가기 성공!', response.data);
+        // 채팅방 목록에서 해당 채팅방 제거
+        setChatRooms(prevRooms =>
+          prevRooms.filter(room => room.chatRoomId !== roomId),
+        );
+      }
+    } catch (e) {
+      console.log('채팅방 나가기 실패', e);
+      Alert.alert('오류', '채팅방을 나가는데 실패했습니다.');
+    }
+  }, []);
+
   return (
     <ScreenContainer>
       <BackgroundImage source={backgroundImage} resizeMode="cover" />
@@ -57,12 +79,7 @@ export default function ChatRoomListScreen() {
         <Container>
           <Header>
             <HeaderTitle>채팅</HeaderTitle>
-
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-              }}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <Image
                 source={require('../assets/icons/searchIcon.png')}
                 alt="search"
@@ -78,9 +95,8 @@ export default function ChatRoomListScreen() {
             </View>
           </Header>
           <ScrollView
-            showsVerticalScrollIndicator={false} // 세로 스크롤바 숨기기
-            showsHorizontalScrollIndicator={false} // 가로 스크롤바 숨기기
-          >
+            showsVerticalScrollIndicator={false}
+            showsHorizontalScrollIndicator={false}>
             <View style={{marginTop: 10}}>
               <Text style={globalStyles.grayBold16}>당신의 대화를</Text>
               <Text style={globalStyles.grayBold16}>빠짐없이 기록할게요.</Text>
@@ -93,7 +109,11 @@ export default function ChatRoomListScreen() {
               <Text>채팅방 목록을 불러오는 중...</Text>
             ) : chatRooms.length > 0 ? (
               chatRooms.map((room, index) => (
-                <ChatItem key={index} room={room} />
+                <ChatItem
+                  key={index}
+                  room={room}
+                  leaveChatRoom={leaveChatRoom}
+                />
               ))
             ) : (
               <Text>채팅방이 없습니다.</Text>
