@@ -30,7 +30,7 @@ function SettingsStackNavigator() {
   return (
     <SettingStack.Navigator>
       <SettingStack.Screen
-        name="Settings"
+        name="SettingsScreen"
         component={SettingsScreen}
         options={{headerShown: false}}
       />

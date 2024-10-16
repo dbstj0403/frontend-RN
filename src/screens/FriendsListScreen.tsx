@@ -129,6 +129,16 @@ export default function FriendsListScreen() {
     [allFriends],
   );
 
+  const removeFriendFromList = useCallback((friendId: string) => {
+    setAllFriends(prev => prev.filter(friend => friend.friendId !== friendId));
+    setCloseFriends(prev =>
+      prev.filter(friend => friend.friendId !== friendId),
+    );
+    setRegularFriends(prev =>
+      prev.filter(friend => friend.friendId !== friendId),
+    );
+  }, []);
+
   useFocusEffect(
     useCallback(() => {
       getFriends();
@@ -179,6 +189,7 @@ export default function FriendsListScreen() {
                   isFavorite={false}
                   updateFriendsList={getFriends}
                   updateFriendStatus={updateFriendStatus}
+                  removeFriendFromList={removeFriendFromList}
                 />
               )}
             </View>
@@ -194,6 +205,7 @@ export default function FriendsListScreen() {
                   isFavorite={true}
                   updateFriendsList={getFriends}
                   updateFriendStatus={updateFriendStatus}
+                  removeFriendFromList={removeFriendFromList}
                 />
               ))}
             </View>
@@ -212,6 +224,7 @@ export default function FriendsListScreen() {
                     isFavorite={false}
                     updateFriendsList={getFriends}
                     updateFriendStatus={updateFriendStatus}
+                    removeFriendFromList={removeFriendFromList}
                   />
                 ))
               )}

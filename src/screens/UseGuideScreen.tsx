@@ -16,7 +16,7 @@ export default function UseGuideScreen() {
   const navigation = useNavigation();
 
   const goToSettings = () => {
-    navigation.navigate('Settings');
+    navigation.navigate('SettingsScreen');
   };
 
   return (

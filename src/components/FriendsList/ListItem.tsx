@@ -1,5 +1,12 @@
 import React from 'react';
-import {Image, Pressable, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Image,
+  Pressable,
+  Text,
+  TouchableOpacity,
+  View,
+  Alert,
+} from 'react-native';
 import styled from 'styled-components/native';
 import {globalStyles} from '../../styles/globalStyles';
 import {useNavigation, NavigationProp} from '@react-navigation/native';
@@ -24,6 +31,7 @@ export default function ListItem({
   isFavorite,
   updateFriendsList,
   updateFriendStatus,
+  removeFriendFromList,
 }: {
   id: string;
   name: string;
@@ -32,6 +40,7 @@ export default function ListItem({
   isFavorite: boolean;
   updateFriendsList: () => void;
   updateFriendStatus: (friendId: string, isFavorite: boolean) => void;
+  removeFriendFromList: (friendId: string) => void;
 }) {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const {userInfo} = useUserStore();
@@ -70,6 +79,41 @@ export default function ListItem({
     });
   };
 
+  const handleLongPress = () => {
+    Alert.alert(
+      '친구 삭제',
+      `${name}님을 친구 목록에서 삭제하시겠습니까?`,
+      [
+        {text: '취소', style: 'cancel'},
+        {text: '삭제', onPress: deleteFriend, style: 'destructive'},
+      ],
+      {cancelable: true},
+    );
+  };
+
+  const deleteFriend = async () => {
+    const token = await AsyncStorage.getItem('jwtAccessToken');
+    console.log(id);
+    try {
+      const response = await api.delete('/friend/delete', {
+        headers: {
+          Authorization: token,
+        },
+        data: {
+          customId: id,
+        },
+      });
+      if (response.status === 204) {
+        console.log('친구 삭제 완료!', response.data);
+        removeFriendFromList(id); // 즉시 UI에서 친구 제거
+        updateFriendsList(); // 백그라운드에서 전체 목록 업데이트
+      }
+    } catch (e: any) {
+      console.log('친구 삭제 실패:', e);
+      Alert.alert('오류', '친구를 삭제하는데 실패했습니다.');
+    }
+  };
+
   if (id === userInfo?.customId) {
     return (
       <Pressable onPress={moveToProfile}>
@@ -90,7 +134,10 @@ export default function ListItem({
     );
   }
   return (
-    <Pressable onPress={moveToProfile}>
+    <Pressable
+      onPress={moveToProfile}
+      onLongPress={handleLongPress}
+      delayLongPress={500}>
       <Container>
         <View style={{display: 'flex', flexDirection: 'row'}}>
           <Image
