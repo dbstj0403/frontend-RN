@@ -2,7 +2,7 @@ import React from 'react';
 import backgroundImage from '../assets/background/homeBackground.png';
 import styled from 'styled-components/native';
 import {useRoute} from '@react-navigation/native';
-import {Image, TouchableOpacity, Text} from 'react-native';
+import {Image, TouchableOpacity, Text, Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {globalStyles} from '../styles/globalStyles';
 
@@ -14,10 +14,20 @@ export default function MyProfileScreen() {
   };
 
   const route = useRoute();
+
   const {id, name, statusMessage} = route.params as {
     id: string;
     name: string;
     statusMessage: string;
+  };
+
+  const goToModifyMyProfile = () => {
+    console.log('함수 실행!');
+    navigation.navigate('ModifyMyProfile', {
+      id,
+      name,
+      statusMessage,
+    });
   };
 
   return (
@@ -33,11 +43,14 @@ export default function MyProfileScreen() {
             />
           </TouchableOpacity>
           <IconContainer>
-            <Image
-              source={require('../assets/icons/editIcon.png')}
-              alt="edit"
-              style={{width: 24, height: 24}}
-            />
+            <TouchableOpacity onPress={goToModifyMyProfile}>
+              <Image
+                source={require('../assets/icons/editIcon.png')}
+                alt="edit"
+                style={{width: 24, height: 24}}
+              />
+            </TouchableOpacity>
+
             <Image
               source={require('../assets/icons/profileSettingIcon.png')}
               alt="setting"
@@ -88,7 +101,7 @@ const Header = styled.View`
   z-index: 1;
 `;
 
-const IconContainer = styled.View`
+const IconContainer = styled.TouchableOpacity`
   display: flex;
   flex-direction: row;
   gap: 10px;

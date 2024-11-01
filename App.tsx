@@ -20,7 +20,8 @@ import FriendsProfileScreen from './src/screens/FriendsProfileScreen';
 import MyProfileScreen from './src/screens/MyProfileScreen';
 import UseGuideScreen from './src/screens/UseGuideScreen';
 import Withdrawalscreen from './src/screens/WithdrawalScreen';
-import ModifyProfilescreen from './src/screens/ModifyProfileScreen';
+import ModifyProfileScreen from './src/screens/ModifyProfileScreen';
+import ModifyMyProfileScreen from './src/screens/ModifyMyProfileScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -81,7 +82,11 @@ const App = () => {
         <Stack.Screen name="MyProfile" component={MyProfileScreen} />
         <Stack.Screen name="Main" component={MainTabNavigator} />
         <Stack.Screen name="Withdrawal" component={Withdrawalscreen} />
-        <Stack.Screen name="ModifyProfile" component={ModifyProfilescreen} />
+        <Stack.Screen name="ModifyProfile" component={ModifyProfileScreen} />
+        <Stack.Screen
+          name="ModifyMyProfile"
+          component={ModifyMyProfileScreen}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

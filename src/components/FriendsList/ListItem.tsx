@@ -79,6 +79,15 @@ export default function ListItem({
     });
   };
 
+  const moveToMyProfile = () => {
+    navigation.navigate('MyProfile', {
+      id,
+      name,
+      statusMessage,
+      isDisabled,
+    });
+  };
+
   const handleLongPress = () => {
     Alert.alert(
       '친구 삭제',
@@ -116,7 +125,7 @@ export default function ListItem({
 
   if (id === userInfo?.customId) {
     return (
-      <Pressable onPress={moveToProfile}>
+      <Pressable onPress={moveToMyProfile}>
         <Container>
           <View style={{display: 'flex', flexDirection: 'row'}}>
             <Image

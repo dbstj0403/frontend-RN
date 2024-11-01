@@ -16,6 +16,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api/config';
 import {useState, useEffect} from 'react';
 import {useUserStore} from '../store/useUserStore';
+import axios from 'axios';
+import RNFS from 'react-native-fs';
 
 interface StatusButtonProps {
   isActive?: boolean;
@@ -38,9 +40,53 @@ export default function ModifyProfilescreen() {
   const [phoneNumber, setPhoneNumber] = useState<string>('');
   const [isDisabled, setIsDisabled] = useState(myInfo?.isDisabled);
   const [voiceType, setVoiceType] = useState('MALE');
+  const [uploading, setUploading] = useState(false);
+  const handleVoiceUpload = async () => {
+    setUploading(true);
 
-  console.log('myInfo', userInfo.name);
+    try {
+      // resolveAssetSource를 사용하여 실제 파일 경로 얻기
+      const resolveAssetSource = require('react-native/Libraries/Image/resolveAssetSource');
+      const audioSource = resolveAssetSource(require('../assets/example.wav'));
+      console.log('Audio source:', audioSource);
 
+      // FormData 생성
+      const formData = new FormData();
+      formData.append('file', {
+        uri: audioSource.uri, // 실제 파일 경로 사용
+        type: 'audio/wav',
+        name: 'example.wav',
+      });
+
+      console.log('FormData created with uri:', audioSource.uri);
+
+      const token = await AsyncStorage.getItem('jwtAccessToken');
+
+      const response = await fetch(`${api.defaults.baseURL}/users/voice`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: token,
+        },
+        body: formData,
+      });
+
+      console.log('Upload response status:', response.status);
+
+      if (response.ok) {
+        Alert.alert('성공', '음성 파일이 성공적으로 업로드되었습니다.');
+      } else {
+        const responseText = await response.text();
+        console.log('Response text:', responseText);
+        throw new Error('업로드 실패');
+      }
+    } catch (error) {
+      console.error('Upload error:', error);
+      Alert.alert('실패', '음성 파일 업로드에 실패했습니다.');
+    } finally {
+      setUploading(false);
+    }
+  };
   const goToSettings = () => {
     navigation.navigate('Settings');
   };
@@ -91,6 +137,8 @@ export default function ModifyProfilescreen() {
       if (response.status === 204) {
         console.log('내 정보 수정하기 성공!', response.data);
         setUserInfo(updatedInfo);
+        Alert.alert('정보 수정 성공', '성공적으로 개인 정보가 수정되었습니다.');
+        goToSettings();
       }
     } catch (e) {
       console.log('Failed to get myProfile info.', e);
@@ -233,6 +281,20 @@ export default function ModifyProfilescreen() {
                       <CheckboxLabel>여성</CheckboxLabel>
                     </CheckboxWrapper>
                   </CheckboxContainer>
+                  <TouchableOpacity
+                    onPress={handleVoiceUpload}
+                    style={{
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      marginTop: 5,
+                    }}>
+                    <Image
+                      source={require('../assets/icons/addFriendsIcon2.png')}
+                      alt="Add voice icon"
+                      style={{width: 20, height: 20, marginRight: 5}} // 아이콘과 텍스트 간의 간격 추가
+                    />
+                    <Text>목소리 추가하기</Text>
+                  </TouchableOpacity>
                 </View>
               ) : null}
             </StatusSection>
