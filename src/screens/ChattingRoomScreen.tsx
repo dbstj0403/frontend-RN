@@ -182,6 +182,8 @@ export default function ChattingRoomScreen() {
       // 화면에 먼저 메시지 추가
       setMessageList(prev => [...prev, newMessage]);
 
+      console.log(message);
+
       // 서버로 메시지 전송
       socketRef.current.emit(
         'textMessage',
