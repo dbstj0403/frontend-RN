@@ -6,6 +6,7 @@ interface UserInfo {
   isDisabled: boolean;
   phoneNumber: string;
   voiceType: string | null;
+  statusMessage: string;
 }
 
 interface UserStore {

@@ -35,12 +35,21 @@ export default function ModifyProfilescreen() {
   const navigation = useNavigation();
   const {userInfo, setUserInfo} = useUserStore();
   const [myInfo, setMyInfo] = useState<MyInfo>();
-  console.log(userInfo);
+  console.log(userInfo?.voiceType);
   const [name, setName] = useState(myInfo?.name);
   const [phoneNumber, setPhoneNumber] = useState<string>('');
   const [isDisabled, setIsDisabled] = useState(myInfo?.isDisabled);
-  const [voiceType, setVoiceType] = useState('MALE');
+  const [voiceType, setVoiceType] = useState(myInfo?.voiceType);
   const [uploading, setUploading] = useState(false);
+
+  useEffect(() => {
+    if (myInfo) {
+      setName(myInfo.name);
+      setIsDisabled(myInfo.isDisabled);
+      setVoiceType(myInfo.voiceType);
+    }
+  }, [myInfo]);
+
   const handleVoiceUpload = async () => {
     setUploading(true);
 
@@ -279,6 +288,30 @@ export default function ModifyProfilescreen() {
                         {voiceType === 'FEMALE' && <CheckMark>✓</CheckMark>}
                       </Checkbox>
                       <CheckboxLabel>여성</CheckboxLabel>
+                    </CheckboxWrapper>
+                    <CheckboxWrapper onPress={() => setVoiceType('ROSE')}>
+                      <Checkbox isChecked={voiceType === 'ROSE'}>
+                        {voiceType === 'ROSE' && <CheckMark>✓</CheckMark>}
+                      </Checkbox>
+                      <CheckboxLabel>로제</CheckboxLabel>
+                    </CheckboxWrapper>
+                    <CheckboxWrapper onPress={() => setVoiceType('BRUNO')}>
+                      <Checkbox isChecked={voiceType === 'BRUNO'}>
+                        {voiceType === 'BRUNO' && <CheckMark>✓</CheckMark>}
+                      </Checkbox>
+                      <CheckboxLabel>브루노 마스</CheckboxLabel>
+                    </CheckboxWrapper>
+                    <CheckboxWrapper onPress={() => setVoiceType('GD')}>
+                      <Checkbox isChecked={voiceType === 'GD'}>
+                        {voiceType === 'GD' && <CheckMark>✓</CheckMark>}
+                      </Checkbox>
+                      <CheckboxLabel>GD</CheckboxLabel>
+                    </CheckboxWrapper>
+                    <CheckboxWrapper onPress={() => setVoiceType('GRANDE')}>
+                      <Checkbox isChecked={voiceType === 'GRANDE'}>
+                        {voiceType === 'GRANDE' && <CheckMark>✓</CheckMark>}
+                      </Checkbox>
+                      <CheckboxLabel>아리아나 그란데</CheckboxLabel>
                     </CheckboxWrapper>
                   </CheckboxContainer>
                   <TouchableOpacity

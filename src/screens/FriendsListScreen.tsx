@@ -184,7 +184,11 @@ export default function FriendsListScreen() {
                 <ListItem
                   id={userInfo.customId}
                   name={userInfo.name}
-                  statusMessage="안녕 나 윤서얌"
+                  statusMessage={
+                    userInfo.statusMessage
+                      ? userInfo.statusMessage
+                      : '상태 메세지가 없습니다.'
+                  }
                   isDisabled={userInfo.isDisabled}
                   isFavorite={false}
                   updateFriendsList={getFriends}

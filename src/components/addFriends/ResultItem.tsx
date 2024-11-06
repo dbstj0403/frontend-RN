@@ -65,7 +65,7 @@ export default function ReslutItem({
         />
         <NameText style={globalStyles.bold18}>{name}</NameText>
         <Text style={globalStyles.grayRegular16}>{statusMessage}</Text>
-        <TouchableOpacity onPress={addFriend}>
+        <TouchableOpacity onPress={addFriend} style={{marginLeft: 60}}>
           <Text>친구 추가</Text>
         </TouchableOpacity>
       </Container>
