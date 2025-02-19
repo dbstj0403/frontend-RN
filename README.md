@@ -12,6 +12,15 @@
 됩니다. 이로써 청각 장애인이 보다 자연스럽고 개인화된 음성 소통을 할 수 있도록 지원하는 서비스입니다.**
 
 ## 서비스 화면
+| ![메인 화면](https://github.com/user-attachments/assets/28c490c6-791e-4963-8d1b-ff8ac7ae58f5) <br> **로그인 화면** | ![메인 화면](https://github.com/user-attachments/assets/726f43ed-f52d-4cc9-ab31-0f3bc4883065) <br> **회원가입 화면** |
+|:----------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------:|
+| ![메인 화면](https://github.com/user-attachments/assets/34a50971-361e-4cbe-a9b7-b3f322d899ac) <br> **메인 화면** | ![메인 화면](https://github.com/user-attachments/assets/a4463d05-69ae-48cd-8484-8f1aa77f8e0c) <br> **친구 검색 화면** |
+| ![메인 화면](https://github.com/user-attachments/assets/726f43ed-f52d-4cc9-ab31-0f3bc4883065) <br> **프로필 화면** | ![메인 화면](https://github.com/user-attachments/assets/23292ac5-e501-4a55-ae4b-6329f7b5fc71) <br> **프로필 수정 화면** |
+| ![메인 화면](https://github.com/user-attachments/assets/a1df4d25-d8dd-4c14-8c08-b3c37edcfb14) <br> **채팅 목록 화면** | ![메인 화면](https://github.com/user-attachments/assets/e77a33a8-2685-4fe0-bccf-d8d98fbc5435) <br> **채팅방 화면** |
+| ![메인 화면](https://github.com/user-attachments/assets/a5f754c9-4d1f-4aa9-bbf5-d6780e20b683) <br> **대화 상대 선택 화면** | ![메인 화면](https://github.com/user-attachments/assets/bf73e365-f3e8-49f5-bc9b-7d2ca45f1df9) <br> **설정 화면** |
+| ![메인 화면](https://github.com/user-attachments/assets/defb77c6-7074-4d49-a966-f778ac87be6a) <br> **개인 정보 수정 화면** | ![메인 화면](https://github.com/user-attachments/assets/9c022631-c727-4d10-ad4c-b03a993b3f16) <br> **사용자 가이드 화면** |
+| ![메인 화면](https://github.com/user-attachments/assets/28e2e635-a689-40ca-b1f1-adc0b0f70498) <br> **회원 탈퇴 화면** | ![메인 화면](https://github.com/user-attachments/assets/91468c0b-53ad-4d8b-b28c-7445b771a22d) <br> **음성 변환 화면** |
+
 
 ## 기술 스택 - Backend
 <div align="center">
