@@ -1,79 +1,29 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+<div align="center">
+    <img src="https://github.com/user-attachments/assets/2f50a6d4-02a0-4b4d-af40-c71f36f94062" width="400" alt="이미지 설명">
+</div>
 
-# Getting Started
+## 서비스 소개
+**청각 장애인들은 일상적인 소통에서 다양한 어려움을 겪고 있습니다. 기존의 문자나 비주얼 기반 소통 도구들이 있지만, 이들 도구는 음성 소통이 가진 즉각성과 몰입감을
+전달하기에는 한계가 있습니다. 특히 청각 장애인의 목소리를 직접 듣지 못한 타인은 그들의 의사소통 방식에 익숙하지 않아 의사 전달에 장애가 생기곤 합니다. 이러한 
+배경에서 "들리담"은 청각 장애인들이 자신만의 고유한 음성을 활용해 보다 편리하고 자연스러운 소통을 할 수 있는 방법을 제공하고자 기획되었습니다.**
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+**"들리담"은 청각 장애인을 위한 실시간 음성 통신 솔루션을 제공하는 애플리케이션입니다. 먼저 청각 장애인이 자신의 목소리를 초기에 등록하면, 들리담은 이 목소리를
+학습하고 개인의 목소리 특성을 가중치로 저장합니다. 이후 청각 장애인이 채팅을 통해 의사소통을 할 때, 상대방은 실제 음성처럼 변조된 청각 장애인의 목소리를 듣게
+됩니다. 이로써 청각 장애인이 보다 자연스럽고 개인화된 음성 소통을 할 수 있도록 지원하는 서비스입니다.**
 
-## Step 1: Start the Metro Server
+## 서비스 화면
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+## 기술 스택 - Backend
+<div align="center">
+    <img src="https://github.com/user-attachments/assets/0acfe31e-63ce-499c-92ba-3534ea3ab1da" width="700" alt="이미지 설명">
+</div>
 
-To start Metro, run the following command from the _root_ of your React Native project:
+## 아키텍처 구조 - Backend
+<div align="center">
+    <img src="https://github.com/user-attachments/assets/aa74ff9b-c3dc-462e-82dd-787a65199904" width="700" alt="이미지 설명">
+</div>
 
-```bash
-# using npm
-npm start
-
-# OR using Yarn
-yarn start
-```
-
-## Step 2: Start your Application
-
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
-
-### For Android
-
-```bash
-# using npm
-npm run android
-
-# OR using Yarn
-yarn android
-```
-
-### For iOS
-
-```bash
-# using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
-
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
-
-## Step 3: Modifying your App
-
-Now that you have successfully run the app, let's modify it.
-
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+## 실시간 음성 통신
+<div align="center">
+    <img src="https://github.com/user-attachments/assets/9996d308-9e9b-43f3-90af-7d0f7ce9d705" width="700" alt="이미지 설명">
+</div>
